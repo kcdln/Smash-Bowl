@@ -1,0 +1,21 @@
+!!! TODO Convert this file into PDF format !
+
+
+
+##Présentation de l'application
+
+Smash Bowl est une application complète (web/mobile/bureautique) développée par la société Stania, start-up passionnée de sport depuis quelques années ayant réalisée plusieurs applications pour des événements sportifs.
+
+Cette année encore le Super Bowl est à l'honneur. Ce trio d'application a pour but de mettre en avant cet événement mondial.
+L'application se veut épurée et simple d'utilisation en permettant aux utilisateurs de faciliter la pratique du pari sportif. Grace à elle, il est possible de consulter via l'application mobile la liste des matchs prévus ainsi que le détail de chacun.
+Ajoutez à cela une application web permettant d'analyser les côtes, parier et même miser sur un ou plusieurs matchs se disputant dans le cadre de la compétition. L'utilisateur peut aussi consulter son historique des mises et vérifier d'un coup d'oeil son bénéfice/sa perte grace à un graphique.
+L'ensemble est géré par un administrateur pouvant créer les équipes, joueurs et matchs à venir. Tandis qu'un commentateur alimente les matchs en live via l'application bureautique.
+
+Le nom de l'application Smash Bowl est un jeu de mots qui fait référence évidemment au Super Bowl mais également au jeu vidéo Super Smash Bros. Brawl (sorti sur la console Nintendo Wii en 2008).
+Ceci afin d'apporter une touche ludique et divertissante à la plateforme de paris sportifs.
+
+
+
+##Identifiants des différents parcours possibles
+
+TODO
