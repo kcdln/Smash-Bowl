@@ -1,9 +1,11 @@
 ##Sommaire
+
 #####[Configuration de l'environnement de travail](#work-environment)
 
 ---
 
 ##Configuration de l'environnement de travail {#work-environment}
+
 J'ai commencé la configuration de mon environnement de travail par générer une paire de clé SSH privée/publique via la commande :
 ```
 $ ssh-keygen -t rsa -b 4096 -C "kcoadalen@gmail.com"
@@ -20,7 +22,7 @@ Par le biai de mon environnement de développement (VS Code), j'ai par ailleurs 
 ```
 $ git clone git@github.com:kcdln/Smash-Bowl.git
 $ git config user.email "kcoadalen@gmail.com"
-$ git config user.name "Kenny C."
+$ git config user.name "Kenny Coadalen"
 ```
 
 Puis vérifié le tout à l'aide des commandes suivantes :
