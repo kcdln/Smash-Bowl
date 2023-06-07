@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="329px" preserveAspectRatio="none" style="width:654px;height:329px;background:#FFFFFF;" version="1.1" viewBox="0 0 654 329" width="654px" zoomAndPan="magnify"><defs/><g><!--MD5=[bdd6754a6858f1003b48474cbb8dbf7f]
+entity Visiteur--><g id="elem_Visiteur"><ellipse cx="209" cy="133.5" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M209,141.5 L209,168.5 M196,149.5 L222,149.5 M209,168.5 L196,183.5 M209,168.5 L222,183.5 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="51" x="183.5" y="197.9951">Visiteur</text></g><!--MD5=[db8075859b8dc6afee89c0188a9ca649]
+entity Utilisateur--><g id="elem_Utilisateur"><ellipse cx="304" cy="133.5" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M304,141.5 L304,168.5 M291,149.5 L317,149.5 M304,168.5 L291,183.5 M304,168.5 L317,183.5 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="68" x="270" y="197.9951">Utilisateur</text></g><g id="elem_Miser sur un match"><ellipse cx="432.228" cy="35.5456" fill="#F1F1F1" rx="85.728" ry="19.5456" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="132" x="366.228" y="38.3923">Miser sur un match</text></g><g id="elem_Miser sur une sélection de matchs"><ellipse cx="176.9721" cy="35.2944" fill="#F1F1F1" rx="134.4721" ry="29.2944" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="238" x="57.9721" y="38.1411">Miser sur une sélection de matchs</text></g><g id="elem_Demander un nouveau mot de passe"><ellipse cx="150.0139" cy="292.2028" fill="#F1F1F1" rx="144.0139" ry="31.2028" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="258" x="21.0139" y="295.0495">Demander un nouveau mot de passe</text></g><g id="elem_Accéder à son espace utilisateur"><ellipse cx="457.8083" cy="292.0617" fill="#F1F1F1" rx="128.3083" ry="28.0617" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="225" x="345.3083" y="294.9083">Accéder à son espace utilisateur</text></g><g id="elem_Consulter son historique des mises"><ellipse cx="510.8042" cy="162.9608" fill="#F1F1F1" rx="137.8042" ry="29.9608" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="245" x="388.3042" y="165.8075">Consulter son historique des mises</text></g><!--MD5=[81c00616618f1a84a0f77737b4730e7e]
+reverse link Visiteur to Utilisateur--><g id="link_Visiteur_Utilisateur"><path d="M239.84,163 C249.84,163 259.84,163 269.84,163 " fill="none" id="Visiteur-backto-Utilisateur" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="234.61,163,243.61,167,239.61,163,243.61,159,234.61,163" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[0b5424f523e11ac63802c272aa8ea4ca]
+link Miser sur un match to Utilisateur--><g id="link_Miser sur un match_Utilisateur"><path d="M413.39,54.75 C393.7,74.06 362.19,104.94 338.04,128.62 " fill="none" id="Miser sur un match-Utilisateur" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[44311780960902bf59fb437c2d2d8033]
+link Miser sur une sélection de matchs to Utilisateur--><g id="link_Miser sur une sélection de matchs_Utilisateur"><path d="M205.19,64.35 C224.19,83.13 249.37,108.02 269.56,127.97 " fill="none" id="Miser sur une sélection de matchs-Utilisateur" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[8648b34612c6e591fda5905a07add08f]
+link Utilisateur to Demander un nouveau mot de passe--><g id="link_Utilisateur_Demander un nouveau mot de passe"><path d="M269.82,192.19 C244.75,212.87 210.78,240.87 185.42,261.79 " fill="none" id="Utilisateur-Demander un nouveau mot de passe" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[12d241cb92d170583b1e1c9fd9156874]
+link Utilisateur to Accéder à son espace utilisateur--><g id="link_Utilisateur_Accéder à son espace utilisateur"><path d="M338.18,192.19 C364.5,213.89 400.6,243.66 426.28,264.84 " fill="none" id="Utilisateur-Accéder à son espace utilisateur" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[9101bbfecbc02fb3e154366c0d707bcb]
+link Utilisateur to Consulter son historique des mises--><g id="link_Utilisateur_Consulter son historique des mises"><path d="M338.37,163 C349.83,163 361.29,163 372.76,163 " fill="none" id="Utilisateur-Consulter son historique des mises" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[3e217edb857a94fb6f492797ec908bf4]
+@startuml
+actor Visiteur
+actor Utilisateur
+
+Visiteur <-right- Utilisateur
+
+Utilisateur -up- (Miser sur un match)
+Utilisateur -up- (Miser sur une sélection de matchs)
+Utilisateur -down- (Demander un nouveau mot de passe)
+Utilisateur -down- (Accéder à son espace utilisateur)
+Utilisateur -right- (Consulter son historique des mises)
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 17:01:30 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

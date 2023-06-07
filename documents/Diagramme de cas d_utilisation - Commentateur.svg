@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="290px" preserveAspectRatio="none" style="width:444px;height:290px;background:#FFFFFF;" version="1.1" viewBox="0 0 444 290" width="444px" zoomAndPan="magnify"><defs/><g><!--MD5=[65f381bbf6b70ae9420fd95f7d3dd741]
+entity Commentateur--><g id="elem_Commentateur"><ellipse cx="214" cy="122.5" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M214,130.5 L214,157.5 M201,138.5 L227,138.5 M214,157.5 L201,172.5 M214,157.5 L227,172.5 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="104" x="162" y="186.9951">Commentateur</text></g><g id="elem_Voir les détails d'un match"><ellipse cx="330.7877" cy="29.8575" fill="#F1F1F1" rx="107.2877" ry="23.8575" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="180" x="240.7877" y="32.7042">Voir les détails d'un match</text></g><g id="elem_Visualiser les matchs"><ellipse cx="96.9996" cy="30.0999" fill="#F1F1F1" rx="90.9996" ry="20.5999" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="144" x="24.9996" y="32.9466">Visualiser les matchs</text></g><g id="elem_Clore un match"><ellipse cx="214.1066" cy="267.3213" fill="#F1F1F1" rx="74.6066" ry="17.3213" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="105" x="158.6066" y="271.0689">Clore un match</text></g><!--MD5=[1285d029f4efadcf3e57284354fccb2d]
+link Voir les détails d'un match to Commentateur--><g id="link_Voir les détails d'un match_Commentateur"><path d="M308.99,53.57 C292.44,70.54 269.41,94.17 250.17,113.91 " fill="none" id="Voir les détails d'un match-Commentateur" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[610233ebdb64ff7e794d1bbe364c410e]
+link Visualiser les matchs to Commentateur--><g id="link_Visualiser les matchs_Commentateur"><path d="M115.8,50.28 C132.46,67.37 157.27,92.81 177.78,113.85 " fill="none" id="Visualiser les matchs-Commentateur" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[71da37711cfc08863a3785faaf248b12]
+link Commentateur to Clore un match--><g id="link_Commentateur_Clore un match"><path d="M214,190.16 C214,210.34 214,234.27 214,249.89 " fill="none" id="Commentateur-Clore un match" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[05e8b834998484d67c77fe511fbe019d]
+@startuml
+actor Commentateur
+
+Commentateur -up- (Voir les détails d'un match)
+Commentateur -up- (Visualiser les matchs)
+Commentateur -down- (Clore un match)
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 17:01:30 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

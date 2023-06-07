@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="273px" preserveAspectRatio="none" style="width:530px;height:273px;background:#FFFFFF;" version="1.1" viewBox="0 0 530 273" width="530px" zoomAndPan="magnify"><defs/><g><!--MD5=[bdd6754a6858f1003b48474cbb8dbf7f]
+entity Visiteur--><g id="elem_Visiteur"><ellipse cx="249" cy="103.5" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M249,111.5 L249,138.5 M236,119.5 L262,119.5 M249,138.5 L236,153.5 M249,138.5 L262,153.5 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="51" x="223.5" y="167.9951">Visiteur</text></g><g id="elem_Se connecter"><ellipse cx="156.0634" cy="249.4127" fill="#F1F1F1" rx="70.0634" ry="16.4127" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93" x="106.5634" y="253.1602">Se connecter</text></g><g id="elem_Visualiser les matchs"><ellipse cx="96.9996" cy="133.0999" fill="#F1F1F1" rx="90.9996" ry="20.5999" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="144" x="24.9996" y="135.9466">Visualiser les matchs</text></g><g id="elem_Parier"><ellipse cx="249.1869" cy="20.5634" fill="#F1F1F1" rx="39.1869" ry="14.5634" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="39" x="227.5666" y="24.0876">Parier</text></g><g id="elem_Voir les détails d'un match"><ellipse cx="416.7877" cy="132.8575" fill="#F1F1F1" rx="107.2877" ry="23.8575" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="180" x="326.7877" y="135.7042">Voir les détails d'un match</text></g><g id="elem_Créer un compte"><ellipse cx="340.8735" cy="249.2747" fill="#F1F1F1" rx="79.3735" ry="18.2747" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="117" x="280.4676" y="252.7248">Créer un compte</text></g><!--MD5=[220a503448b86d2802fb8ec32107876b]
+link Visiteur to Se connecter--><g id="link_Visiteur_Se connecter"><path d="M223.34,165.59 C205.49,187.57 182.48,215.9 168.5,233.11 " fill="none" id="Visiteur-Se connecter" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[73ce079bc562749cc9b1c78ea2febd05]
+link Visualiser les matchs to Visiteur--><g id="link_Visualiser les matchs_Visiteur"><path d="M188.14,133 C199.87,133 211.6,133 223.32,133 " fill="none" id="Visualiser les matchs-Visiteur" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[e75f56e4d5d9c25aaab5c5bf3d784eec]
+link Parier to Visiteur--><g id="link_Parier_Visiteur"><path d="M249,35.05 C249,49.8 249,74.04 249,94.59 " fill="none" id="Parier-Visiteur" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[9543e95dfaec85eca7ce8ae9241c4684]
+link Visiteur to Voir les détails d'un match--><g id="link_Visiteur_Voir les détails d'un match"><path d="M274.59,133 C286.18,133 297.77,133 309.36,133 " fill="none" id="Visiteur-Voir les détails d'un match" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[1304676ad92cfd6b6471a558aff5f9b8]
+link Visiteur to Créer un compte--><g id="link_Visiteur_Créer un compte"><path d="M274.63,165.89 C291.53,186.94 313.04,213.71 326.92,230.97 " fill="none" id="Visiteur-Créer un compte" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[02258c9dc2046f5eb74bc00cd605dfd3]
+@startuml
+actor Visiteur
+
+Visiteur -down- (Se connecter)
+Visiteur -left- (Visualiser les matchs)
+Visiteur -up- (Parier)
+Visiteur -right- (Voir les détails d'un match)
+Visiteur -down- (Créer un compte)
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 17:01:30 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>
