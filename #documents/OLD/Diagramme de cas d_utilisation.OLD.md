@@ -7,7 +7,7 @@
 
 @startuml
 
-actor Visiteur
+actor Visiteur #ffff99
 
 Visiteur -down- (Se connecter)
 Visiteur -left- (Visualiser les matchs)
@@ -23,8 +23,8 @@ Visiteur -down- (Créer un compte)
 
 @startuml
 
-actor Visiteur
-actor Utilisateur
+actor Visiteur #ffff99
+actor Utilisateur #ffbb88
 
 Visiteur <-right- Utilisateur
 
@@ -42,10 +42,11 @@ Utilisateur -right- (Consulter son historique des mises)
 
 @startuml
 
-actor Commentateur
+actor Commentateur #99ff99
 
 Commentateur -up- (Voir les détails d'un match)
 Commentateur -up- (Visualiser les matchs)
+Commentateur -down- (Commenter un match)
 Commentateur -down- (Clore un match)
 
 @enduml
@@ -56,10 +57,10 @@ Commentateur -down- (Clore un match)
 
 @startuml
 
-actor Visiteur
-actor Utilisateur
-actor Commentateur
-actor Administrateur
+actor Visiteur #ffff99
+actor Utilisateur #ffbb88
+actor Commentateur #99ff99
+actor Administrateur #9999ff
 
 Visiteur <-up- Administrateur
 Utilisateur <-up- Administrateur
