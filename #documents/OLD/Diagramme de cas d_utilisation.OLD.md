@@ -47,7 +47,7 @@ actor Commentateur #99ff99
 Commentateur -up- (Voir les détails d'un match)
 Commentateur -up- (Visualiser les matchs)
 Commentateur -down- (Commenter un match)
-Commentateur -down- (Clore un match)
+Commentateur -down- (Fermer un match)
 
 @enduml
 
@@ -68,8 +68,9 @@ Commentateur <-up- Administrateur
 
 Administrateur -left- (Accéder à son espace administrateur)
 Administrateur -right- (Renseigner les côtes des équipes)
-Administrateur -up- (Créer des joueurs)
+Administrateur -up- (Modifier un match)
 Administrateur -up- (Affecter des équipes dans un match)
+Administrateur -up- (Créer des joueurs)
 Administrateur -up- (Créer des équipes)
 
 @enduml

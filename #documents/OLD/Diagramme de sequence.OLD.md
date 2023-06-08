@@ -13,48 +13,53 @@ actor Visiteur #ffff99
 database BDD order 30
 
 
-Visiteur -> Serveur ++ : S'inscrire
+Visiteur -> Systeme ++ : S'inscrire
 
-Serveur -> BDD ++ : Vérifier que l'adresse e-mail n'existe pas déjà
-BDD --> Serveur: retour OK
-Serveur -> BDD: Création du compte utilisateur
-BDD --> Serveur -- : retour OK
+Systeme -> BDD ++ : Vérifier que l'adresse e-mail n'existe pas déjà
+BDD --> Systeme: retour OK
+Systeme -> BDD: Création du compte utilisateur
+BDD --> Systeme -- : retour OK
 
-Serveur -> Visiteur -- : Mail envoyé pour validation de l'inscription
+Systeme -> Visiteur -- : Mail envoyé pour validation de l'inscription
 
 Visiteur --> Visiteur: authentifié automatiquement en tant qu'utilisateur
 
 == ==
 
-Visiteur -> Serveur ++ : S'authentifier
+Visiteur -> Systeme ++ : S'authentifier
 
-Serveur -> BDD ++ : Vérifier que les identifiants existent et sont valides
-BDD --> Serveur -- : retour OK
+Systeme -> BDD ++ : Vérifier que les identifiants existent et sont valides
+BDD --> Systeme -- : retour OK
 
-Serveur --> Visiteur -- : authentifié en tant qu'utilisateur
-
-== ==
-
-Visiteur -> Serveur ++ : Visualiser tous les matchs
-
-Serveur -> BDD ++ : Récupération de tous les matchs et leurs infos
-BDD --> Serveur -- : retour liste
-
-Serveur -> Visiteur -- : Afficher la liste des matchs
-
-
-Visiteur -> Serveur ++ : Visualiser les détails d'un match de la liste
-
-Serveur -> BDD ++ : Récupération de toutes les informations du match
-BDD --> Serveur -- : retour liste
-
-Serveur -> Visiteur -- : Afficher les détails du match
+Systeme --> Visiteur -- : authentifié en tant qu'utilisateur
 
 == ==
 
-Visiteur -> Serveur: Parier sur une sélection de match
+Visiteur -> Systeme ++ : Visualiser tous les matchs
+
+Systeme -> BDD ++ : Récupération de tous les matchs et leurs informations
+BDD --> Systeme -- : retour liste
+
+alt Si statut match terminé ou en cours
+  Systeme -> Visiteur : Afficher toutes les informations dont le score
+else Sinon
+  Systeme -> Visiteur : Afficher les informations sans le score
+end
+
+Systeme -> Visiteur -- : Afficher la liste des matchs
+
+
+Visiteur -> Systeme ++ : Visualiser les détails d'un match de la liste
+
+Systeme -> BDD ++ : Récupération de toutes les informations du match
+BDD --> Systeme -- : retour liste
+
+Systeme -> Visiteur -- : Afficher les détails du match
+
+== ==
+
+Visiteur -> Systeme: Parier sur une sélection de match
 note right of Visiteur: Mais possibilité de miser qu'en tant qu'utilisateur
-
 
 @enduml
 
@@ -69,48 +74,103 @@ hide footbox
 actor Utilisateur #ffbb88
 database BDD order 30
 
-Utilisateur -> Serveur ++ : Accéder à son espace utilisateur
+Utilisateur -> Systeme ++ : Accéder à son espace utilisateur
 
-Serveur -> BDD ++ : Vérifier le niveau d'accès autorisé
-BDD --> Serveur: retour OK
-Serveur -> BDD: Récupération des infos de l'utilisateur
-BDD --> Serveur -- : retour liste
+Systeme -> BDD ++ : Vérifier le niveau d'accès autorisé
+BDD --> Systeme: retour OK
+Systeme -> BDD: Récupération des informations de l'utilisateur
+BDD --> Systeme -- : retour liste
 
-Serveur -> Utilisateur -- : Afficher l'espace utilisateur
-
-== ==
-
-Utilisateur -> Serveur ++ : Consulter son historique des mises
-
-Serveur -> BDD ++ : Récupération de l'historique
-BDD --> Serveur -- : retour liste
-
-Serveur -> Utilisateur -- : Afficher l'historique
+Systeme -> Utilisateur -- : Afficher l'espace utilisateur
 
 == ==
 
-Utilisateur -> Serveur ++ : Demander un nouveau mot de passe
+Utilisateur -> Systeme ++ : Consulter son historique des mises
 
-Serveur -> BDD ++ : Vérifier nom et adresse e-mail
-BDD --> Serveur -- : retour OK
+Systeme -> BDD ++ : Récupération de l'historique
+BDD --> Systeme -- : retour liste
 
-Serveur -> Utilisateur -- : Mail envoyé avec le nouveau mot de passe
+Systeme -> Utilisateur : Afficher l'historique
+
+loop Pour chaque mise effectuée
+  alt Si statut match terminé
+    Systeme -> Utilisateur : Afficher le montant gagné ou perdu
+  end
+
+  alt Si statut match à venir
+    Utilisateur -> Systeme : Boutons de mise-à-jour/suppression de la mise
+
+    Systeme -> BDD ++ : Vérifier le niveau d'accès autorisé
+    BDD --> Systeme: retour OK
+    Systeme -> BDD: Mise-à-jour/Suppression de la mise
+    BDD --> Systeme -- : retour OK
+  end
+end loop
+
+Systeme -> Utilisateur -- : Afficher l'historique mis-à-jour
+
+== ==
+
+Utilisateur -> Systeme ++ : Demander un nouveau mot de passe
+
+Systeme -> BDD ++ : Vérifier nom et adresse e-mail
+
+alt Si le nom et l'adresse sont valides
+  BDD --> Systeme : retour OK
+  Systeme -> Systeme : Générer un nouveau mot de passe temporaire
+
+  Systeme -> Utilisateur -- : Mail envoyé avec le nouveau mot de passe
+else Sinon
+  BDD --> Systeme -- : retour KO
+  Systeme -> Utilisateur : Afficher une erreur
+end
+
 note right of Utilisateur: Le nouveau mot de passe est à modifier dès la prochaine connexion
 
 == ==
 
-Utilisateur -> Serveur ++ : Miser sur une sélection de match
+Utilisateur -> Systeme ++ : Visualiser tous les matchs misés
 
-loop Boucle: tant qu'il y a des matchs dont l'utilisateur a souhaité faire un pari
+Systeme -> BDD ++ : Récupération des matchs et leurs informations
+BDD --> Systeme -- : retour liste
 
-Utilisateur -> Serveur : Miser sur un match
+loop Pour chaque match misé
+  alt Si statut match terminé
+    Systeme -> Utilisateur : Afficher nom des équipes, date du match et le score
+  else Sinon
+    Systeme -> Utilisateur : Afficher le nom des équipes et la date seulement
+  end
 
-Serveur -> BDD ++ : Enregistrement de la mise
-BDD --> Serveur -- : retour OK
+  Systeme -> Utilisateur -- : Afficher la liste des matchs
+
+
+  alt Si statut match en cours
+    Utilisateur -> Systeme ++ : Visualiser les détails d'un match de la liste
+
+    Systeme -> BDD ++ : Récupération de toutes les informations du match
+    BDD --> Systeme -- : retour liste
+
+    Systeme -> Utilisateur -- : Afficher les détails du match
+  end
+end loop
+
+== ==
+
+Utilisateur -> Systeme ++ : Miser sur une sélection de match
+
+loop Tant qu'il y a des matchs sur lesquels l'utilisateur a souhaité faire un pari
+
+alt Si statut match à venir
+  Utilisateur -> Systeme : Miser sur un match
+
+  Systeme -> BDD ++ : Enregistrement/Mise-à-jour de la mise
+  BDD --> Systeme -- : retour OK
+end
+
 
 end loop
 
-Serveur -> Utilisateur -- : Notifier l'utilisateur de l'enregistrement de la mise
+Systeme -> Utilisateur -- : Notifier l'utilisateur de l'enregistrement
 
 @enduml
 
@@ -125,16 +185,49 @@ hide footbox
 actor Commentateur #99ff99
 database BDD order 30
 
-Commentateur -> Serveur ++ : Consulter les matchs du jour
+Commentateur -> Systeme ++ : Consulter les matchs du jour
 
-Serveur -> BDD ++: TODO
-BDD --> Serveur --: TODO
+Systeme -> BDD ++ : Récupération de tous les matchs et leurs informations
+BDD --> Systeme -- : retour liste
 
-Serveur -> Commentateur -- : Afficher la liste des matchs
+Systeme -> Commentateur -- : Afficher la liste des matchs
+
+
+Commentateur -> Systeme ++ : Voir les détails d'un match de la liste
+
+Systeme -> BDD ++ : Récupération de toutes les informations du match
+BDD --> Systeme -- : retour liste
+
+Systeme -> Commentateur -- : Afficher les détails du match
 
 == ==
 
+Commentateur -> Systeme ++ : Commenter un match
 
+Systeme -> BDD ++ : Vérifier le niveau d'accès autorisé
+BDD --> Systeme: retour OK
+
+Systeme -> BDD : Enregistrement du commentaire
+BDD --> Systeme -- : retour liste
+
+Systeme -> Commentateur -- : Afficher le nouveau commentaire à la suite
+
+== ==
+
+Commentateur -> Systeme ++ : Fermer un match
+
+Systeme -> BDD ++ : Vérifier le niveau d'accès autorisé
+BDD --> Systeme: retour OK
+
+alt Si il y a eu des prolongations dans le match
+  Systeme -> BDD : Mise-à-jour de l'heure de fin du match
+  BDD --> Systeme -- : retour OK
+end
+
+Systeme -> BDD : Mise-à-jour de l'état du match de en cours à terminé
+BDD --> Systeme -- : retour OK
+
+Systeme -> Commentateur -- : Afficher les informations définitives du match
 
 @enduml
 
@@ -149,34 +242,45 @@ hide footbox
 actor Administrateur #9999ff
 database BDD order 30
 
-Administrateur -> Serveur ++ : Accéder à son espace administrateur
+Administrateur -> Systeme ++ : Accéder à son espace administrateur
 
-Serveur -> BDD ++ : Vérifier le niveau d'accès autorisé
-BDD --> Serveur: retour OK
-Serveur -> BDD: Récupération des infos de l'administrateur
-BDD --> Serveur -- : retour liste
+Systeme -> BDD ++ : Vérifier le niveau d'accès autorisé
+BDD --> Systeme: retour OK
+Systeme -> BDD: Récupération des informations de l'administrateur
+BDD --> Systeme -- : retour liste
 
-Serveur -> Administrateur -- : Afficher l'espace administrateur
-
-== ==
-
-Administrateur -> Serveur ++ : Créer des joueurs et des équipes
-
-Serveur -> BDD ++: Enregistrement des joueurs et équipes créés
-BDD --> Serveur --: retour OK
-
-Serveur -> Administrateur -- : Notifier l'administrateur de l'enregistrement
+Systeme -> Administrateur -- : Afficher l'espace administrateur
 
 == ==
 
-Administrateur -> Serveur ++ : Affecter des équipes dans un match
-Administrateur -> Serveur : Renseigner les côtes des équipes
+Administrateur -> Systeme ++ : Créer des joueurs et des équipes
 
-Serveur -> BDD ++: Enregistrement des affectations & côtes
-BDD --> Serveur --: retour OK
+Systeme -> BDD ++: Enregistrement des joueurs et équipes créés
+BDD --> Systeme --: retour OK
+
+Systeme -> Administrateur -- : Notifier l'administrateur de l'enregistrement
+
+== ==
+
+Administrateur -> Systeme ++ : Créer un match en y affectant deux équipes
+Administrateur -> Systeme : Renseigner les côtes des équipes
+
+Systeme -> BDD ++: Enregistrement des affectations & côtes
+BDD --> Systeme --: retour OK
 
 
-Serveur -> Administrateur -- : Afficher le nouveau match
+Systeme -> Administrateur -- : Afficher le nouveau match
 
+== ==
+
+alt Si statut match à venir
+  Administrateur -> Systeme ++ : Modifier les informations d'un match
+
+  Systeme -> BDD ++: Mise-à-jour des informations
+  BDD --> Systeme --: retour OK
+
+
+  Systeme -> Administrateur -- : Afficher le match mis-à-jour
+end
 
 @enduml
