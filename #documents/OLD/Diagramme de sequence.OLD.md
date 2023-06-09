@@ -156,12 +156,12 @@ end loop
 
 == ==
 
-Utilisateur -> Systeme ++ : Miser sur une sélection de match
+Utilisateur -> Systeme ++ : Miser sur un match ou une sélection de matchs
 
-loop Tant qu'il y a des matchs sur lesquels l'utilisateur a souhaité faire un pari
+loop Pour chaque match de la sélection de l'utilisateur
 
 alt Si statut match à venir
-  Utilisateur -> Systeme : Miser sur un match
+  Utilisateur -> Systeme : Effectuer une mise
 
   Systeme -> BDD ++ : Enregistrement/Mise-à-jour de la mise
   BDD --> Systeme -- : retour OK
