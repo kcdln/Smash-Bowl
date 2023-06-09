@@ -219,12 +219,11 @@ Commentateur -> Systeme ++ : Fermer un match
 Systeme -> BDD ++ : Vérifier le niveau d'accès autorisé
 BDD --> Systeme: retour OK
 
-alt Si il y a eu des prolongations dans le match
-  Systeme -> BDD : Mise-à-jour de l'heure de fin du match
-  BDD --> Systeme -- : retour OK
-end
 
 Systeme -> BDD : Mise-à-jour de l'état du match de en cours à terminé
+alt Si il y a eu des prolongations dans le match
+  Systeme -> BDD : Mise-à-jour de l'heure de fin du match
+end
 BDD --> Systeme -- : retour OK
 
 Systeme -> Commentateur -- : Afficher les informations définitives du match

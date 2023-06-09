@@ -57,20 +57,35 @@ Commentateur -down- (Fermer un match)
 
 @startuml
 
+actor Administrateur #9999ff
+
+Administrateur -up- (Créer des joueurs)
+Administrateur -up- (Créer des équipes)
+Administrateur -right- (Configurer un pari)
+Administrateur -left- (Affecter des équipes dans un match)
+Administrateur -down- (Modifier un match)
+Administrateur -down- (Accéder à son espace administrateur)
+
+@enduml
+
+
+---
+## Super Administrateur
+
+@startuml
+
+skinparam actorStyle awesome
+actor :Super Administrateur: as SuperAdmin << SuperBowlAdmin >> #555555
+
+skinparam actorStyle default
 actor Visiteur #ffff99
 actor Utilisateur #ffbb88
 actor Commentateur #99ff99
 actor Administrateur #9999ff
 
-Visiteur <|-up- Administrateur
-Utilisateur <|-up- Administrateur
-Commentateur <|-up- Administrateur
-
-Administrateur -left- (Accéder à son espace administrateur)
-Administrateur -right- (Renseigner les côtes des équipes)
-Administrateur -up- (Modifier un match)
-Administrateur -up- (Affecter des équipes dans un match)
-Administrateur -up- (Créer des joueurs)
-Administrateur -up- (Créer des équipes)
+Visiteur <|- Utilisateur
+Utilisateur <|- SuperAdmin
+Commentateur <|-left- SuperAdmin
+Administrateur <|-up- SuperAdmin
 
 @enduml

@@ -6,26 +6,26 @@
 
 ##Configuration de l'environnement de travail {#work-environment}
 
-J'ai commencé la configuration de mon environnement de travail par générer une paire de clé SSH privée/publique via la commande :
+J'ai commencé la configuration de mon environnement de travail par générer une paire de clé SSH privée/publique, en prenant le soin d'y ajouter une phrase secrète, via la commande :
 ```
 $ ssh-keygen -t rsa -b 4096 -C "kcoadalen@gmail.com"
 ```
 
 J'ai alors copié/collé le contenu de ma clé publique dans les paramètres de mon compte GitHub.
-Aussi j'ai ajouté ma clé privée à l'agent SSH après avoir lancé ce dernier grace aux commandes :
+Aussi j'ai ajouté ma clé privée à l'agent SSH après avoir lancé ce dernier grâce aux commandes :
 ```
 $ eval "$(ssh-agent -s)"
 $ ssh-add ~/.ssh/id_rsa
 ```
 
-Par le biai de mon environnement de développement (VS Code), j'ai par ailleurs cloné mon dépôt distant en local ainsi que configuré mes informations Git pour l'historique de chaque commit via les commandes suivantes :
+Par le biai de mon environnement de développement (VS Code), j'ai par ailleurs cloné mon nouveau dépôt distant en local ainsi que configuré mes informations Git pour l'historique de chaque commit via les commandes suivantes :
 ```
 $ git clone git@github.com:kcdln/Smash-Bowl.git
 $ git config user.email "kcoadalen@gmail.com"
 $ git config user.name "Kenny Coadalen"
 ```
 
-Puis vérifié le tout à l'aide des commandes suivantes :
+Puis j'ai vérifié le tout à l'aide des commandes suivantes :
 ```
 $ ssh-add -l
 $ git remote -v
