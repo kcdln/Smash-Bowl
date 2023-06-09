@@ -26,7 +26,7 @@ Visiteur -down- (Créer un compte)
 actor Visiteur #ffff99
 actor Utilisateur #ffbb88
 
-Visiteur <-right- Utilisateur
+Visiteur <|-right- Utilisateur
 
 Utilisateur -up- (Miser sur un match)
 Utilisateur -up- (Miser sur une sélection de matchs)
@@ -62,9 +62,9 @@ actor Utilisateur #ffbb88
 actor Commentateur #99ff99
 actor Administrateur #9999ff
 
-Visiteur <-up- Administrateur
-Utilisateur <-up- Administrateur
-Commentateur <-up- Administrateur
+Visiteur <|-up- Administrateur
+Utilisateur <|-up- Administrateur
+Commentateur <|-up- Administrateur
 
 Administrateur -left- (Accéder à son espace administrateur)
 Administrateur -right- (Renseigner les côtes des équipes)
