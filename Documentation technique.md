@@ -68,14 +68,7 @@ Ensuite j'ai configuré VS Code en y intégrant tout un lot d'extensions utiles,
 ##Modele conceptuel de donnees
 
 
-#### Diagramme MCD
-
 ![Modèle Conceptuel de Données](./drafts/Modele_Conceptuel_de_Donnees.png)
-
-
-#### Exemple du rendu en BDD
-
-![Aperçu table `match` localhost PhpMyAdmin](./drafts/Capture_d_ecran_localhost_PhpMyAdmin.png)
 
 
 

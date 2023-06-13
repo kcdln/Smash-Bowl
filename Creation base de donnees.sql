@@ -47,7 +47,8 @@ CREATE TABLE `player` (
 	`updated_at` DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP() COMMENT 'Automatic field',
 	`deleted_at` DATETIME NULL DEFAULT NULL,
 	PRIMARY KEY (`id_player`),
-	CONSTRAINT `FK__player_team_id_team` FOREIGN KEY (`id_team`) REFERENCES `team` (`id_team`) ON UPDATE CASCADE ON DELETE RESTRICT
+	CONSTRAINT `FK__player_team_id_team` FOREIGN KEY (`id_team`) REFERENCES `team` (`id_team`) ON UPDATE CASCADE ON DELETE RESTRICT,
+	UNIQUE INDEX `UNIQUE__id_team_jersey_number` (`id_team`, `jersey_number`)
 )
 COMMENT='Contains the list of players who can are in a team ("Joueurs")'
 COLLATE='utf8_unicode_ci'
@@ -60,7 +61,7 @@ CREATE TABLE `match` (
 	`id_team2` INT(10) UNSIGNED NOT NULL,
 	`date_start_at` DATE NOT NULL COMMENT 'Date format is \'YYYY-MM-DD\'',
 	`hour_start_at` TIME NOT NULL COMMENT 'Hour format is \'HH:II:SS\'',
-	`hour_end_at` TIME NOT NULL COMMENT 'Hour format is \'HH:II:SS\'',
+	`hour_end_at` TIME NOT NULL DEFAULT SEC_TO_TIME(MOD(TIME_TO_SEC(ADDTIME(hour_start_at, '01:00:00')), 86400)) COMMENT 'Hour format is \'HH:II:SS\'',
 	`status` ENUM('TO_COME','IN_PROGRESS', 'FINISHED', 'CANCELED') NOT NULL DEFAULT 'TO_COME' COMMENT '\'TO_COME\' ("A venir"),\'IN_PROGRESS\' ("En cours"), \'FINISHED\' ("Termine"), \'CANCELED\' ("Annule")',
 	`weather` ENUM('CLEAR', 'SUNNY', 'CLOUDY', 'RAINY', 'STORMY', 'SNOWY', 'FOGGY') NOT NULL DEFAULT 'CLEAR' COMMENT '\'CLEAR\' ("Temps clair"), \'SUNNY\' ("Ensoleille"), \'CLOUDY\' ("Nuageux"), \'RAINY\' ("Pluvieux"), \'STORMY\' ("Orageux"), \'SNOWY\' ("Neigeux"), \'FOGGY\' ( "Brumeux")',
 	`score_team1` SMALLINT(3) UNSIGNED NOT NULL DEFAULT 0,
@@ -70,7 +71,8 @@ CREATE TABLE `match` (
 	`deleted_at` DATETIME NULL DEFAULT NULL,
 	PRIMARY KEY (`id_match`),
 	CONSTRAINT `FK__match_team1_id_team` FOREIGN KEY (`id_team1`) REFERENCES `team` (`id_team`) ON UPDATE CASCADE ON DELETE RESTRICT,
-	CONSTRAINT `FK__match_team2_id_team` FOREIGN KEY (`id_team2`) REFERENCES `team` (`id_team`) ON UPDATE CASCADE ON DELETE RESTRICT
+	CONSTRAINT `FK__match_team2_id_team` FOREIGN KEY (`id_team2`) REFERENCES `team` (`id_team`) ON UPDATE CASCADE ON DELETE RESTRICT,
+	CONSTRAINT `CONSTRAINT__different_teams` CHECK (id_team1 <> id_team2)
 )
 COMMENT='Contains the list of matches on which it is possible to bet ("Matchs")'
 COLLATE='utf8_unicode_ci'
