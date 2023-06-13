@@ -32,7 +32,7 @@ CREATE TABLE `team` (
 	`deleted_at` DATETIME NULL DEFAULT NULL,
 	PRIMARY KEY (`id_team`)
 )
-COMMENT='Contains the list of Super Bowl teams which integrated players ("Utilisateurs")'
+COMMENT='Contains the list of Super Bowl teams which integrated players ("Equipes")'
 COLLATE='utf8_unicode_ci'
 ;
 
@@ -63,8 +63,8 @@ CREATE TABLE `match` (
 	`hour_end_at` TIME NOT NULL COMMENT 'Hour format is \'HH:II:SS\'',
 	`status` ENUM('TO_COME','IN_PROGRESS', 'FINISHED', 'CANCELED') NOT NULL DEFAULT 'TO_COME' COMMENT '\'TO_COME\' ("A venir"),\'IN_PROGRESS\' ("En cours"), \'FINISHED\' ("Termine"), \'CANCELED\' ("Annule")',
 	`weather` ENUM('CLEAR', 'SUNNY', 'CLOUDY', 'RAINY', 'STORMY', 'SNOWY', 'FOGGY') NOT NULL DEFAULT 'CLEAR' COMMENT '\'CLEAR\' ("Temps clair"), \'SUNNY\' ("Ensoleille"), \'CLOUDY\' ("Nuageux"), \'RAINY\' ("Pluvieux"), \'STORMY\' ("Orageux"), \'SNOWY\' ("Neigeux"), \'FOGGY\' ( "Brumeux")',
-	`score_team1` SMALLINT(5) UNSIGNED NOT NULL DEFAULT 0,
-	`score_team2` SMALLINT(5) UNSIGNED NOT NULL DEFAULT 0,
+	`score_team1` SMALLINT(3) UNSIGNED NOT NULL DEFAULT 0,
+	`score_team2` SMALLINT(3) UNSIGNED NOT NULL DEFAULT 0,
 	`created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP() COMMENT 'Automatic field',
 	`updated_at` DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP() COMMENT 'Automatic field',
 	`deleted_at` DATETIME NULL DEFAULT NULL,
@@ -72,7 +72,7 @@ CREATE TABLE `match` (
 	CONSTRAINT `FK__match_team1_id_team` FOREIGN KEY (`id_team1`) REFERENCES `team` (`id_team`) ON UPDATE CASCADE ON DELETE RESTRICT,
 	CONSTRAINT `FK__match_team2_id_team` FOREIGN KEY (`id_team2`) REFERENCES `team` (`id_team`) ON UPDATE CASCADE ON DELETE RESTRICT
 )
-COMMENT='Contains the list of matches on which it is possible to bet ("Utilisateurs")'
+COMMENT='Contains the list of matches on which it is possible to bet ("Matchs")'
 COLLATE='utf8_unicode_ci'
 ;
 
@@ -117,13 +117,15 @@ COLLATE='utf8_unicode_ci'
 CREATE TABLE `comment` (
 	`id_comment` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 	`id_user` INT(10) UNSIGNED NOT NULL,
+	`id_match` INT(10) UNSIGNED NOT NULL,
 	`short_description` VARCHAR(255) NOT NULL,
 	`long_description` VARCHAR(2000) NULL DEFAULT NULL,
 	`created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP() COMMENT 'Automatic field',
 	`updated_at` DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP() COMMENT 'Automatic field',
 	`deleted_at` DATETIME NULL DEFAULT NULL,
 	PRIMARY KEY (`id_comment`),
-	CONSTRAINT `FK__comment_user_id_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON UPDATE CASCADE ON DELETE RESTRICT
+	CONSTRAINT `FK__comment_user_id_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON UPDATE CASCADE ON DELETE RESTRICT,
+	CONSTRAINT `FK__comment_match_id_match` FOREIGN KEY (`id_match`) REFERENCES `match` (`id_match`) ON UPDATE CASCADE ON DELETE RESTRICT
 )
 COMMENT='Contains the list of comments written by a commentator for a match ("Commentaires")'
 COLLATE='utf8_unicode_ci'

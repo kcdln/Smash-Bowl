@@ -2,11 +2,15 @@
 
 ##Sommaire
 
-#####[Réflexions initiales technologiques sur le sujet](#technologies-choice)
-#####[Configuration de l'environnement de travail](#work-environment)
-#####[Modèle conceptuel de données](#mcd-diagram)
-#####[Diagramme d’utilisation et diagramme de séquence](#others-diagrams)
-#####[Explication du plan de test](#test-plan)
+1 [Réflexions initiales technologiques sur le sujet](#technologies-choice)
+
+2 [Configuration de l'environnement de travail](#work-environment)
+
+3 [Modèle conceptuel de données (MCD)](#mcd-diagram)
+
+4 [Diagramme d’utilisation et diagramme de séquence](#diagrams)
+
+5 [Explication du plan de test](#test-plan)
 
 ---
 
@@ -15,7 +19,9 @@
 ##Réflexions initiales technologiques sur le sujet {#technologies-choice}
 
 
-TODO (reprendre ce qui est écrit dans la copie à rendre)
+TODO
+
+(reprendre en partie ce qui est écrit dans la copie à rendre ?)
 
 
 
@@ -59,17 +65,45 @@ Ensuite j'ai configuré VS Code en y intégrant tout un lot d'extensions utiles,
 
 
 
-##Modèle conceptuel de données {#mcd-diagram}
+##Modèle conceptuel de données (MCD) {#mcd-diagram}
 
 
-![Diagramme modele conceptuel de donnees](Modele_Conceptuel_de_Donnees.png)
+#### Diagramme MCD
+
+![Modèle Conceptuel de Données](./drafts/Modele_Conceptuel_de_Donnees.png)
+
+
+#### Exemple du rendu en BDD
+
+![Aperçu table `match` localhost PhpMyAdmin](./drafts/Capture_d_ecran_localhost_PhpMyAdmin.png)
 
 
 
-##Diagramme d’utilisation et diagramme de séquence {#others-diagrams}
+##Diagramme d’utilisation et diagramme de séquence {#diagrams}
 
 
-TODO
+#### Diagramme de cas d'utilisation
+
+![Diagramme de cas d'utilisation - Visiteur](./drafts/Diagramme_de_cas_d_utilisation_-_Visiteur.png)
+
+![Diagramme de cas d'utilisation - Utilisateur](./drafts/Diagramme_de_cas_d_utilisation_-_Utilisateur.png)
+
+![Diagramme de cas d'utilisation - Commentateur](./drafts/Diagramme_de_cas_d_utilisation_-_Commentateur.png)
+
+![Diagramme de cas d'utilisation - Administrateur](./drafts/Diagramme_de_cas_d_utilisation_-_Administrateur.png)
+
+![Diagramme de cas d'utilisation - Super Administrateur](./drafts/Diagramme_de_cas_d_utilisation_-_Super_Administrateur.png)
+
+
+#### Diagramme de séquence
+
+![Diagramme de séquence - Visiteur](./drafts/Diagramme_de_sequence_-_Visiteur.png)
+
+![Diagramme de séquence - Utilisateur](./drafts/Diagramme_de_sequence_-_Utilisateur.png)
+
+![Diagramme de séquence - Commentateur](./drafts/Diagramme_de_sequence_-_Commentateur.png)
+
+![Diagramme de séquence - Administrateur](./drafts/Diagramme_de_sequence_-_Administrateur.png)
 
 
 
@@ -77,56 +111,3 @@ TODO
 
 
 TODO
-
-
-
-##TEST
-
-
-![Diagramme de cas d utilisation - Administrateur](Diagramme_de_cas_d_utilisation_-_Administrateur.png)
-
-
-
-![Ceci est un exemple d’image](https://github.com/kcdln/Smash-Bowl/blob/master/drafts/Diagramme_de_cas_d_utilisation_-_Administrateur.png)
-
-[Lien](https://github.com/kcdln/Smash-Bowl/blob/master/drafts/Diagramme_de_cas_d_utilisation_-_Administrateur.png)
-
-
-
-[License](https://github.com/kcdln/Smash-Bowl/blob/master/LICENSE)
-
-
-
-![Ceci est un exemple d’image1](https://github.com/kcdln/Smash-Bowl/blob/master/Modele_Conceptuel_de_Donnees.png)
-
-[Lien 1](https://github.com/kcdln/Smash-Bowl/blob/master/Modele_Conceptuel_de_Donnees.png)
-
-
-
-![Ceci est un exemple d’image2](Modele_Conceptuel_de_Donnees.png)
-
-[Lien 2](Modele_Conceptuel_de_Donnees.png)
-
-
-
-![Ceci est un exemple d’image3](./Modele_Conceptuel_de_Donnees.png)
-
-[Lien 3](./Modele_Conceptuel_de_Donnees.png)
-
-
-
-![Ceci est un exemple d’image4](drafts/Diagramme_de_cas_d_utilisation_-_Super_Administrateur.png)
-
-[Lien 4](drafts/Diagramme_de_cas_d_utilisation_-_Super_Administrateur.png)
-
-
-
-![Ceci est un exemple d’image5](./drafts/Diagramme_de_cas_d_utilisation_-_Super_Administrateur.png)
-
-[Lien 5](./drafts/Diagramme_de_cas_d_utilisation_-_Super_Administrateur.png)
-
-
-
-![Ceci est un exemple d’image6](https://www.google.fr/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png)
-
-[Lien 6](https://www.google.fr/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png)
