@@ -2,21 +2,21 @@
 
 ##Sommaire
 
-1 [Réflexions initiales technologiques sur le sujet](#technologies-choice)
+1 [Reflexions initiales technologiques sur le sujet](#reflexions-initiales-technologiques-sur-le-sujet)
 
-2 [Configuration de l'environnement de travail](#work-environment)
+2 [Configuration de l environnement de travail](#configuration-de-l-environnement-de-travail)
 
-3 [Modèle conceptuel de données (MCD)](#mcd-diagram)
+3 [Modele conceptuel de donnees](#modele-conceptuel-de-donnees)
 
-4 [Diagramme d’utilisation et diagramme de séquence](#diagrams)
+4 [Diagramme d utilisation et diagramme de sequence](#diagramme-d-utilisation-et-diagramme-de-sequence)
 
-5 [Explication du plan de test](#test-plan)
+5 [Explication du plan de test](#explication-du-plan-de-test)
 
 ---
 
 
 
-##Réflexions initiales technologiques sur le sujet {#technologies-choice}
+##Reflexions initiales technologiques sur le sujet
 
 
 TODO
@@ -25,7 +25,7 @@ TODO
 
 
 
-##Configuration de l'environnement de travail {#work-environment}
+##Configuration de l environnement de travail
 
 
 J'ai commencé la configuration de mon environnement de travail par générer une paire de clé SSH privée/publique, en prenant le soin d'y ajouter une phrase secrète, via la commande :
@@ -65,7 +65,7 @@ Ensuite j'ai configuré VS Code en y intégrant tout un lot d'extensions utiles,
 
 
 
-##Modèle conceptuel de données (MCD) {#mcd-diagram}
+##Modele conceptuel de donnees
 
 
 #### Diagramme MCD
@@ -79,35 +79,53 @@ Ensuite j'ai configuré VS Code en y intégrant tout un lot d'extensions utiles,
 
 
 
-##Diagramme d’utilisation et diagramme de séquence {#diagrams}
+##Diagramme d utilisation et diagramme de sequence
 
 
 #### Diagramme de cas d'utilisation
 
+###### Visiteur
+
 ![Diagramme de cas d'utilisation - Visiteur](./drafts/Diagramme_de_cas_d_utilisation_-_Visiteur.png)
+
+###### Utilisateur
 
 ![Diagramme de cas d'utilisation - Utilisateur](./drafts/Diagramme_de_cas_d_utilisation_-_Utilisateur.png)
 
+###### Commentateur
+
 ![Diagramme de cas d'utilisation - Commentateur](./drafts/Diagramme_de_cas_d_utilisation_-_Commentateur.png)
 
+###### Administrateur
+
 ![Diagramme de cas d'utilisation - Administrateur](./drafts/Diagramme_de_cas_d_utilisation_-_Administrateur.png)
+
+###### Super Administrateur
 
 ![Diagramme de cas d'utilisation - Super Administrateur](./drafts/Diagramme_de_cas_d_utilisation_-_Super_Administrateur.png)
 
 
 #### Diagramme de séquence
 
+###### Visiteur
+
 ![Diagramme de séquence - Visiteur](./drafts/Diagramme_de_sequence_-_Visiteur.png)
+
+###### Utilisateur
 
 ![Diagramme de séquence - Utilisateur](./drafts/Diagramme_de_sequence_-_Utilisateur.png)
 
+###### Commentateur
+
 ![Diagramme de séquence - Commentateur](./drafts/Diagramme_de_sequence_-_Commentateur.png)
+
+###### Administrateur
 
 ![Diagramme de séquence - Administrateur](./drafts/Diagramme_de_sequence_-_Administrateur.png)
 
 
 
-##Explication du plan de test {#test-plan}
+##Explication du plan de test
 
 
 TODO
