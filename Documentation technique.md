@@ -43,6 +43,7 @@ $ ssh-add ~/.ssh/id_rsa
 Par le biai de mon environnement de développement (VS Code), j'ai par ailleurs cloné mon nouveau dépôt distant en local ainsi que configuré mes informations Git pour l'historique de chaque commit via les commandes suivantes :
 ```
 $ git clone git@github.com:kcdln/Smash-Bowl.git
+$ cd Smash-Bowl/
 $ git config user.email "kcoadalen@gmail.com"
 $ git config user.name "Kenny Coadalen"
 ```
