@@ -1,0 +1,13 @@
+article {
+    background-color: var(--neutral-0) !important;
+}
+
+.bg-color-neutral-400 {
+    background-color: var(--neutral-400);
+}
+
+footer img {
+    color: var(--neutral-0) !important;
+    height: 2em;
+    width: 2em;
+}
