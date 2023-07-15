@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="GANTT SmashBowl" company="" webLink="http://" view-date="2023-05-22" view-index="0" gantt-divider-location="701" resource-divider-location="300" version="3.2.3247" locale="fr_FR">
+    <description/>
+    <view zooming-state="default:3" id="gantt-chart">
+        <field id="tpd10" name="ID" width="36" order="0"/>
+        <field id="tpd9" name="Prédécesseurs" width="85" order="1"/>
+        <field id="tpd3" name="Nom" width="241" order="2"/>
+        <field id="tpd6" name="Durée" width="45" order="3"/>
+        <field id="tpd4" name="Date de début" width="89" order="4"/>
+        <field id="tpd5" name="Date de fin" width="85" order="5"/>
+        <field id="tpd1" name="Priorité" width="68" order="6"/>
+        <field id="tpd7" name="Avancée" width="51" order="7"/>
+        <option id="taskLabelUp" value="name"/>
+        <option id="taskLabelDown" value=""/>
+        <option id="taskLabelLeft" value="taskDates"/>
+        <option id="taskLabelRight" value="advancement"/>
+        <option id="filter.completedTasks" value="false"/>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nom" width="210" order="0"/>
+        <field id="1" name="Rôle par défaut" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars base-id="fr">
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="1" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+        <date year="" month="1" date="1" type="HOLIDAY">
+            <![CDATA[1er janvier]]>
+        </date>
+        <date year="" month="5" date="1" type="HOLIDAY">
+            <![CDATA[1er mai]]>
+        </date>
+        <date year="" month="5" date="8" type="HOLIDAY">
+            <![CDATA[8 mai]]>
+        </date>
+        <date year="" month="7" date="14" type="HOLIDAY">
+            <![CDATA[14 juillet]]>
+        </date>
+        <date year="" month="8" date="15" type="HOLIDAY">
+            <![CDATA[Assomption]]>
+        </date>
+        <date year="" month="11" date="1" type="HOLIDAY">
+            <![CDATA[Toussaint]]>
+        </date>
+        <date year="" month="11" date="11" type="HOLIDAY">
+            <![CDATA[11 novembre]]>
+        </date>
+        <date year="" month="12" date="25" type="HOLIDAY">
+            <![CDATA[Jour de Noël]]>
+        </date>
+        <date year="2022" month="4" date="18" type="HOLIDAY">
+            <![CDATA[Lundi de Pâques]]>
+        </date>
+        <date year="2022" month="5" date="26" type="HOLIDAY">
+            <![CDATA[Ascension]]>
+        </date>
+        <date year="2022" month="6" date="6" type="HOLIDAY">
+            <![CDATA[Lundi de Pentecôte]]>
+        </date>
+        <date year="2023" month="4" date="10" type="HOLIDAY">
+            <![CDATA[Lundi de Pâques]]>
+        </date>
+        <date year="2023" month="5" date="18" type="HOLIDAY">
+            <![CDATA[Ascension]]>
+        </date>
+        <date year="2023" month="5" date="29" type="HOLIDAY">
+            <![CDATA[Lundi de Pentecôte]]>
+        </date>
+        <date year="2024" month="4" date="1" type="HOLIDAY">
+            <![CDATA[Lundi de Pâques]]>
+        </date>
+        <date year="2024" month="5" date="9" type="HOLIDAY">
+            <![CDATA[Ascension]]>
+        </date>
+        <date year="2024" month="5" date="20" type="HOLIDAY">
+            <![CDATA[Lundi de Pentecôte]]>
+        </date>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" name="Analyse des besoins" color="#000000" meeting="false" start="2023-05-26" duration="11" complete="81" thirdDate="2023-05-26" thirdDate-constraint="0" expand="true">
+            <task id="5" name="Relève des informations pertinentes" color="#8cb6ce" meeting="false" start="2023-05-26" duration="1" complete="100" thirdDate="2023-05-26" thirdDate-constraint="0" priority="0" expand="true">
+                <depend id="6" type="2" difference="0" hardness="Rubber"/>
+            </task>
+            <task id="6" name="Planning" color="#8cb6ce" meeting="false" start="2023-05-30" duration="1" complete="95" thirdDate="2023-05-26" thirdDate-constraint="0" expand="true">
+                <depend id="7" type="2" difference="0" hardness="Strong"/>
+                <depend id="8" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="7" name="Conception de l'architecture" color="#000000" meeting="false" start="2023-06-01" duration="4" complete="100" thirdDate="2023-06-02" thirdDate-constraint="0" expand="false">
+                <depend id="1" type="2" difference="0" hardness="Strong"/>
+                <task id="8" name="Diagrammes" color="#8cb6ce" meeting="false" start="2023-06-01" duration="2" complete="100" thirdDate="2023-05-26" thirdDate-constraint="0" priority="2" expand="true">
+                    <depend id="9" type="2" difference="0" hardness="Strong"/>
+                    <depend id="10" type="1" difference="0" hardness="Strong"/>
+                    <depend id="11" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="9" name="Structure BDD" color="#8cb6ce" meeting="false" start="2023-06-05" duration="2" complete="100" thirdDate="2023-05-26" thirdDate-constraint="0" expand="true"/>
+            </task>
+            <task id="10" name="Choix des technologies" color="#8cb6ce" meeting="false" start="2023-06-01" duration="9" complete="70" thirdDate="2023-05-26" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="1" name="Maquettage" color="#000000" meeting="false" start="2023-06-08" duration="5" complete="8" thirdDate="2023-05-26" thirdDate-constraint="0" expand="true">
+            <depend id="2" type="2" difference="0" hardness="Strong"/>
+            <task id="12" name="Zoning" color="#8cb6ce" meeting="false" start="2023-06-08" duration="1" complete="0" thirdDate="2023-06-06" thirdDate-constraint="0" priority="0" expand="true"/>
+            <task id="11" name="Wireframe" color="#8cb6ce" meeting="false" start="2023-06-08" duration="2" complete="20" thirdDate="2023-06-06" thirdDate-constraint="0" expand="true">
+                <depend id="12" type="1" difference="0" hardness="Strong"/>
+                <depend id="13" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="13" name="Charte graphique" color="#8cb6ce" meeting="false" start="2023-06-12" duration="1" complete="10" thirdDate="2023-06-06" thirdDate-constraint="0" priority="2" expand="true">
+                <depend id="14" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="14" name="Maquette" color="#8cb6ce" meeting="false" start="2023-06-13" duration="2" complete="0" thirdDate="2023-06-06" thirdDate-constraint="0" priority="4" expand="true">
+                <depend id="15" type="2" difference="0" hardness="Strong"/>
+            </task>
+        </task>
+        <task id="2" name="Intégration" color="#000000" meeting="false" start="2023-06-16" duration="15" complete="0" thirdDate="2023-05-26" thirdDate-constraint="0" expand="true">
+            <depend id="4" type="2" difference="0" hardness="Strong"/>
+            <task id="15" name="Préparation des ressources" color="#8cb6ce" meeting="false" start="2023-06-16" duration="1" complete="20" thirdDate="2023-06-09" thirdDate-constraint="0" priority="3" expand="true">
+                <depend id="16" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="16" name="Structure HTML" color="#8cb6ce" meeting="false" start="2023-06-19" duration="5" complete="0" thirdDate="2023-06-09" thirdDate-constraint="0" priority="4" expand="true">
+                <depend id="17" type="1" difference="0" hardness="Strong"/>
+                <depend id="19" type="1" difference="0" hardness="Strong"/>
+                <depend id="20" type="2" difference="0" hardness="Strong"/>
+                <depend id="22" type="2" difference="0" hardness="Strong"/>
+                <depend id="24" type="1" difference="0" hardness="Strong"/>
+                <depend id="25" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="17" name="Ajout des éléments visuels" color="#8cb6ce" meeting="false" start="2023-06-19" duration="2" complete="0" thirdDate="2023-06-12" thirdDate-constraint="0" expand="true"/>
+            <task id="19" name="Navigation interne" color="#8cb6ce" meeting="false" start="2023-06-19" duration="1" complete="0" thirdDate="2023-06-12" thirdDate-constraint="0" expand="true"/>
+            <task id="20" name="Fonctions intéractives" color="#8cb6ce" meeting="false" start="2023-06-27" duration="2" complete="0" thirdDate="2023-06-09" thirdDate-constraint="0" expand="true">
+                <depend id="18" type="2" difference="0" hardness="Strong"/>
+                <depend id="26" type="1" difference="0" hardness="Strong"/>
+            </task>
+            <task id="18" name="Mise en page CSS" color="#8cb6ce" meeting="false" start="2023-06-30" duration="5" complete="0" thirdDate="2023-06-09" thirdDate-constraint="0" priority="4" expand="true">
+                <depend id="21" type="1" difference="0" hardness="Strong"/>
+                <depend id="23" type="2" difference="0" hardness="Rubber"/>
+            </task>
+            <task id="21" name="Intégration des scripts JS" color="#8cb6ce" meeting="false" start="2023-06-30" duration="4" complete="0" thirdDate="2023-06-09" thirdDate-constraint="0" expand="true"/>
+            <task id="23" name="Optimisation des performances" color="#8cb6ce" meeting="false" start="2023-07-11" duration="1" complete="0" thirdDate="2023-06-09" thirdDate-constraint="0" priority="0" expand="true"/>
+            <task id="22" name="Tests" color="#8cb6ce" meeting="false" start="2023-06-27" duration="8" complete="0" thirdDate="2023-06-09" thirdDate-constraint="0" priority="2" expand="true"/>
+            <task id="24" name="Documentation" color="#8cb6ce" meeting="false" start="2023-06-19" duration="13" complete="0" thirdDate="2023-06-12" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="3" name="Développement des règles de gestion" color="#000000" meeting="false" start="2023-06-27" duration="7" complete="0" thirdDate="2023-05-26" thirdDate-constraint="0" expand="false">
+            <depend id="4" type="2" difference="0" hardness="Strong"/>
+            <task id="25" name="Règles de gestion utilisateur" color="#8cb6ce" meeting="false" start="2023-06-27" duration="3" complete="0" thirdDate="2023-06-12" thirdDate-constraint="0" priority="2" expand="true"/>
+            <task id="26" name="Contrôle de la sécurité" color="#8cb6ce" meeting="false" start="2023-06-27" duration="7" complete="0" thirdDate="2023-06-12" thirdDate-constraint="0" priority="4" expand="true"/>
+        </task>
+        <task id="4" name="Déploiement" color="#8cb6ce" meeting="false" start="2023-07-13" duration="3" complete="0" thirdDate="2023-05-26" thirdDate-constraint="0" expand="true"/>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <previous>
+        <previous-tasks name="2023-05-30 - Etat initial du projet">
+            <previous-task id="0" start="2023-05-26" duration="6" meeting="false" super="true"/>
+            <previous-task id="5" start="2023-05-26" duration="1" meeting="false" super="false"/>
+            <previous-task id="6" start="2023-05-30" duration="1" meeting="false" super="false"/>
+            <previous-task id="7" start="2023-06-01" duration="3" meeting="false" super="true"/>
+            <previous-task id="8" start="2023-06-01" duration="3" meeting="false" super="false"/>
+            <previous-task id="9" start="2023-06-01" duration="2" meeting="false" super="false"/>
+            <previous-task id="10" start="2023-06-05" duration="2" meeting="false" super="false"/>
+            <previous-task id="1" start="2023-06-06" duration="5" meeting="false" super="true"/>
+            <previous-task id="11" start="2023-06-06" duration="2" meeting="false" super="false"/>
+            <previous-task id="12" start="2023-06-06" duration="1" meeting="false" super="false"/>
+            <previous-task id="13" start="2023-06-09" duration="1" meeting="false" super="false"/>
+            <previous-task id="14" start="2023-06-12" duration="2" meeting="false" super="false"/>
+            <previous-task id="2" start="2023-06-15" duration="14" meeting="false" super="true"/>
+            <previous-task id="15" start="2023-06-15" duration="1" meeting="false" super="false"/>
+            <previous-task id="16" start="2023-06-16" duration="5" meeting="false" super="false"/>
+            <previous-task id="17" start="2023-06-16" duration="2" meeting="false" super="false"/>
+            <previous-task id="19" start="2023-06-16" duration="1" meeting="false" super="false"/>
+            <previous-task id="20" start="2023-06-26" duration="2" meeting="false" super="false"/>
+            <previous-task id="18" start="2023-06-29" duration="5" meeting="false" super="false"/>
+            <previous-task id="21" start="2023-06-29" duration="4" meeting="false" super="false"/>
+            <previous-task id="23" start="2023-07-07" duration="1" meeting="false" super="false"/>
+            <previous-task id="22" start="2023-06-26" duration="8" meeting="false" super="false"/>
+            <previous-task id="24" start="2023-06-16" duration="13" meeting="false" super="false"/>
+            <previous-task id="3" start="2023-06-26" duration="7" meeting="false" super="true"/>
+            <previous-task id="25" start="2023-06-26" duration="3" meeting="false" super="false"/>
+            <previous-task id="26" start="2023-06-26" duration="7" meeting="false" super="false"/>
+            <previous-task id="4" start="2023-07-10" duration="3" meeting="false" super="false"/>
+        </previous-tasks>
+        <previous-tasks name="2023-06-01 - Etat après planning">
+            <previous-task id="0" start="2023-05-26" duration="11" meeting="false" super="true"/>
+            <previous-task id="5" start="2023-05-26" duration="1" meeting="false" super="false"/>
+            <previous-task id="6" start="2023-05-30" duration="1" meeting="false" super="false"/>
+            <previous-task id="7" start="2023-06-01" duration="4" meeting="false" super="true"/>
+            <previous-task id="8" start="2023-06-01" duration="2" meeting="false" super="false"/>
+            <previous-task id="9" start="2023-06-05" duration="2" meeting="false" super="false"/>
+            <previous-task id="10" start="2023-06-01" duration="9" meeting="false" super="false"/>
+            <previous-task id="1" start="2023-06-08" duration="5" meeting="false" super="true"/>
+            <previous-task id="11" start="2023-06-08" duration="2" meeting="false" super="false"/>
+            <previous-task id="12" start="2023-06-08" duration="1" meeting="false" super="false"/>
+            <previous-task id="13" start="2023-06-12" duration="1" meeting="false" super="false"/>
+            <previous-task id="14" start="2023-06-13" duration="2" meeting="false" super="false"/>
+            <previous-task id="2" start="2023-06-16" duration="15" meeting="false" super="true"/>
+            <previous-task id="15" start="2023-06-16" duration="1" meeting="false" super="false"/>
+            <previous-task id="16" start="2023-06-19" duration="5" meeting="false" super="false"/>
+            <previous-task id="17" start="2023-06-19" duration="2" meeting="false" super="false"/>
+            <previous-task id="19" start="2023-06-19" duration="1" meeting="false" super="false"/>
+            <previous-task id="20" start="2023-06-27" duration="2" meeting="false" super="false"/>
+            <previous-task id="18" start="2023-06-30" duration="5" meeting="false" super="false"/>
+            <previous-task id="21" start="2023-06-30" duration="4" meeting="false" super="false"/>
+            <previous-task id="23" start="2023-07-11" duration="1" meeting="false" super="false"/>
+            <previous-task id="22" start="2023-06-27" duration="8" meeting="false" super="false"/>
+            <previous-task id="24" start="2023-06-19" duration="13" meeting="false" super="false"/>
+            <previous-task id="3" start="2023-06-27" duration="7" meeting="false" super="true"/>
+            <previous-task id="25" start="2023-06-27" duration="3" meeting="false" super="false"/>
+            <previous-task id="26" start="2023-06-27" duration="7" meeting="false" super="false"/>
+            <previous-task id="4" start="2023-07-13" duration="3" meeting="false" super="false"/>
+        </previous-tasks>
+    </previous>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+</project>
