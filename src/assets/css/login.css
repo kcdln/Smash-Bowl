@@ -1,0 +1,43 @@
+form {
+  background-color: var(--neutral-400);
+}
+
+form label {
+  color: var(--neutral-0);
+  
+  /* H4 style */
+  font-family: Roboto;
+  font-size: 18px;
+}
+
+.text-danger {
+  color: var(--color-primary-900) !important;
+}
+
+::placeholder {
+  color: var(--neutral-400) !important;
+}
+
+
+
+/*****************************/
+/******* MEDIA QUERIES *******/
+/*****************************/
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .container-fluid .col-md-6 {
+    max-width: 40vw;
+  }
+  
+  .container-fluid .col-md-6 {
+    border-left: none !important;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .container-fluid .col-md-6 {
+    max-width: 35vw;
+  }
+}
