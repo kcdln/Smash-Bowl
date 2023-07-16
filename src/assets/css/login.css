@@ -4,18 +4,6 @@ form {
 
 form label {
   color: var(--neutral-0);
-  
-  /* H4 style */
-  font-family: Roboto;
-  font-size: 18px;
-}
-
-.text-danger {
-  color: var(--color-primary-900) !important;
-}
-
-::placeholder {
-  color: var(--neutral-400) !important;
 }
 
 

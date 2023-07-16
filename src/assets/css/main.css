@@ -10,14 +10,14 @@
   /* --bs-form-invalid-border-color: var(--color-primary-900); */
 }
 
-header a {
-  color: inherit;
-  text-decoration: inherit;
-}
-
 .header-container {
   background-color: var(--color-primary-100);
   color: var(--neutral-0);
+}
+
+header a {
+  color: inherit;
+  text-decoration: inherit;
 }
 
 .nav-pills .nav-link {
@@ -118,17 +118,33 @@ article:nth-of-type(odd) {
 }
 
 button {
-  background-color: var(--color-primary-100) !important;
-  border-color: var(--color-primary-500) !important;
-  color: var(--neutral-0) !important;
-  
   /* H4 style */
   font-family: Roboto !important;
   font-size: 24px !important;
 }
 
-button:hover {
+button:not(.btn-close):not(.btn-secondary) {
+  background-color: var(--color-primary-100) !important;
+  border-color: var(--color-primary-500) !important;
+  color: var(--neutral-0) !important;
+}
+
+button:not(.btn-close):not(.btn-secondary):hover {
   background-color: var(--color-primary-500) !important;
+}
+
+form label {
+  /* H4 style */
+  font-family: Roboto;
+  font-size: 18px;
+}
+
+.text-danger {
+  color: var(--color-primary-900) !important;
+}
+
+::placeholder {
+  color: var(--neutral-400) !important;
 }
 
 
