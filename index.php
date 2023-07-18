@@ -1,3 +1,6 @@
+<?php $sRelativePath = ''; ?>
+<?php $sAbsolutePath = __DIR__ . '/' . $sRelativePath; ?>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -7,32 +10,19 @@
         
         <!-- Import CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-        <link href="/src/assets/css/main.css" rel="stylesheet">
-        <link href="/src/assets/css/index.css" rel="stylesheet">
+        <link href="<?= $sRelativePath; ?>src/assets/css/main.css" rel="stylesheet">
+        <link href="<?= $sRelativePath; ?>src/assets/css/index.css" rel="stylesheet">
     </head>
     <body>
-        <script src="/src/assets/js/redirect-on-mobile.js"></script>
+        <script src="<?= $sRelativePath; ?>src/assets/js/redirect-on-mobile.js"></script>
 
         <!-- Header & Nav -->
-        <header>
-            <div class="header-container d-flex align-items-center justify-content-around">
-                <a href="/">
-                    <h1 class="mb-0">Smash Bowl</h1>
-                </a>
-                <nav class="d-none d-md-block nav nav-pills">
-                    <ul>
-                        <li><a class="flex-md-fill text-md-center nav-link" href="/src/views/login.html">Se connecter</a></li>
-                        <li><a class="flex-md-fill text-md-center nav-link" href="/src/views/match/list.html">Voir les matchs</a></li>
-                        <li><a class="flex-md-fill text-md-center nav-link" href="#">Parier</a></li>
-                        <li><a class="flex-md-fill text-md-center nav-link disabled">Mon espace</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
+        <?php include_once $sAbsolutePath . 'src/widgets/header.php'; ?>
+
         
         <main class="large-content">
             <!-- Event & app presentation -->
-            <div class="container-fluid bg-image p-5" style="background-image: url('/src/assets/img/super-bowl-presentation.jpg')">
+            <div class="container-fluid bg-image p-5" style="background-image: url('<?= $sRelativePath; ?>src/assets/img/super-bowl-presentation.jpg')">
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-10 col-lg-9 col-xl-8 col-xxl-7 bg-blur">
                         <h4>Bienvenue sur Smash Bowl, la destination ultime pour l'événement du Super Bowl !</h4>
@@ -48,7 +38,7 @@
             <section>
                 <div class="no-result d-none">
                     <p class="text-center">Aucun match n'est prévu aujourd'hui, revenez dès demain.</p>
-                    <p class="text-center">Vous pouvez aussi parcourir la liste de tous les matchs dans la rubrique "<a class="" href="/src/views/match/list.html">Voir les matchs</a>".</p>
+                    <p class="text-center">Vous pouvez aussi parcourir la liste de tous les matchs dans la rubrique "<a class="" href="<?= $sRelativePath; ?>src/views/match/list.php">Voir les matchs</a>".</p>
                 </div>
 
                 <div class="container">
@@ -242,4 +232,3 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </body>
 </html>
-

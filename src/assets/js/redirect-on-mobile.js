@@ -4,9 +4,9 @@ if (window.innerWidth < 768) {
     const bUserLogged = false;
     // Redirection to the mobile version according to user is logged or not
     if (bUserLogged) {
-        window.location.href = "/src/views/match/list.html";
+        window.location.href = "src/views/match/list.php";
     } else {
-        window.location.href = "/src/views/login.html";
+        window.location.href = "src/views/login.php";
     }
 }
   

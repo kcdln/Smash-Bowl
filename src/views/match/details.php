@@ -1,3 +1,6 @@
+<?php $sRelativePath = '../../../'; ?>
+<?php $sAbsolutePath = __DIR__ . '/' . $sRelativePath; ?>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -7,26 +10,12 @@
 
         <!-- Import CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-        <link href="/src/assets/css/main.css" rel="stylesheet">
-        <link href="/src/assets/css/match/details.css" rel="stylesheet">
+        <link href="<?= $sRelativePath; ?>src/assets/css/main.css" rel="stylesheet">
+        <link href="<?= $sRelativePath; ?>src/assets/css/match/details.css" rel="stylesheet">
     </head>
     <body>
         <!-- Header & Nav -->
-        <header class="mb-sm-1 mb-md-3">
-            <div class="header-container d-flex align-items-center justify-content-around">
-                <a href="/">
-                    <h1 class="mb-0">Smash Bowl</h1>
-                </a>
-                <nav class="d-none d-md-block nav nav-pills">
-                    <ul>
-                        <li><a class="flex-md-fill text-md-center nav-link" href="/src/views/login.html">Se connecter</a></li>
-                        <li><a class="flex-md-fill text-md-center nav-link" href="/src/views/match/list.html">Voir les matchs</a></li>
-                        <li><a class="flex-md-fill text-md-center nav-link" href="#">Parier</a></li>
-                        <li><a class="flex-md-fill text-md-center nav-link disabled">Mon espace</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
+        <?php include_once $sAbsolutePath . 'src/widgets/header.php'; ?>
         
         <main>
             <div class="p-0 px-sm-3">
@@ -98,7 +87,7 @@
                                                     <div class="row justify-content-center">
                                                         <div class="col-4">
                                                             <label for="user-bet-team1">Mise</label>
-                                                            <input id="user-bet-team1" class="form-control w-100" type="number" name="user-bet-team1" step="0.01" required>
+                                                            <input id="user-bet-team1" class="form-control w-100" type="number" name="user-bet-team1" min="0.01" step="0.01" required>
                                                         </div>
                                                         <div class="col-2 border-start border-end">
                                                             <label>Côte</label>
@@ -110,7 +99,7 @@
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="user-bet-team2">Mise</label>
-                                                            <input id="user-bet-team2" class="form-control w-100" type="number" name="user-bet-team2" step="0.01" required>
+                                                            <input id="user-bet-team2" class="form-control w-100" type="number" name="user-bet-team2" min="0.01" step="0.01" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -141,7 +130,7 @@
                             </div>
                             <div class="col-1"></div>
                             <div id="teams-composition-separator" class="col-1 d-flex justify-content-center align-items-center border-start border-end">
-                                <img src="/src/assets/img/lombardi-trophy.png" alt="Trophée Vince-Lombardi">
+                                <img src="<?= $sRelativePath; ?>src/assets/img/lombardi-trophy.png" alt="Trophée Vince-Lombardi">
                             </div>
                             <div class="col-1"></div>
                             <div class="col-4 col-md-3">
@@ -208,10 +197,10 @@
         </main>
         
         <footer class="container-fluid d-block d-md-none sticky-bottom as-h3 p-3">
-            <a class="link-underline link-underline-opacity-0" href="/src/views/match/list.html">
+            <a class="link-underline link-underline-opacity-0" href="src/views/match/list.php">
                 <div class="row">
                     <div class="col-12">
-                        <img src="/src/assets/icon/arrow-left-short.svg" alt="Flèche gauche">
+                        <img src="src/assets/icon/arrow-left-short.svg" alt="Flèche gauche">
                         <p class="d-inline-block as-h3 m-0">Retour à la liste</p>
                     </div>
                 </div>
@@ -220,7 +209,6 @@
 
         <!-- Import JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-        <script src="/src/assets/js/form.js"></script>
+        <script src="<?= $sRelativePath; ?>src/assets/js/form.js"></script>
     </body>
 </html>
-
