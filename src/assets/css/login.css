@@ -12,6 +12,15 @@ form label {
 /******* MEDIA QUERIES *******/
 /*****************************/
 
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  header {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+  }
+}
+
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   .container-fluid .col-md-6 {

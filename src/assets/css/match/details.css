@@ -1,5 +1,21 @@
 article {
     background-color: var(--neutral-0) !important;
+    border: 0.3em solid var(--neutral-600) !important;
+}
+
+.team-player img {
+    /* Hack to approach lines between themselves */
+    margin: -0.3em 0;
+}
+
+.team-player > div.col-2 {
+    position: relative;
+}
+
+.team-player > div.col-2 > p {
+    margin-bottom: 0;
+    position: absolute;
+    bottom: 0;
 }
 
 #teams-composition-separator img {
@@ -14,4 +30,18 @@ footer img {
 
 .bg-color-neutral-400 {
     background-color: var(--neutral-400);
+}
+
+
+
+/*****************************/
+/******* MEDIA QUERIES *******/
+/*****************************/
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .team-player img {
+        /* Hack to approach lines between themselves */
+        margin: -0.5em 0;
+    }
 }
