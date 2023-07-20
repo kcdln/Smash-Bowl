@@ -8,6 +8,14 @@ h3.section-title {
   padding: 0.3em 0;
 }
 
+article:not(.match-in-progress) {
+  opacity: .4;
+}
+
+article:nth-of-type(odd) {
+  background-color: var(--neutral-400);
+}
+
 /* @source Animation generated on https://10015.io/tools/css-loader-generator */
 .pulse {
   animation: pulse-c6zlskmn 1.2s infinite;
@@ -50,5 +58,9 @@ h3.section-title {
 @media (min-width: 768px) {
   article {
     min-height: inherit;
+  }
+  
+  article:not(.match-in-progress) {
+    opacity: inherit;
   }
 }

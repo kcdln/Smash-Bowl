@@ -109,14 +109,6 @@ article.match-in-progress::before {
   font-size: 24px;
 }
 
-article:not(.match-in-progress) {
-  opacity: .4;
-}
-
-article:nth-of-type(odd) {
-  background-color: var(--neutral-400);
-}
-
 button {
   /* H4 style */
   font-family: Roboto !important;
@@ -180,10 +172,6 @@ form label {
   
   section {
     margin-bottom: 3em;
-  }
-  
-  article:not(.match-in-progress) {
-    opacity: inherit;
   }
 
   article .container .as-h2 {
