@@ -59,7 +59,7 @@ FROM `team` t1
 JOIN `team` t2 ON t1.`id_team` <> t2.`id_team`;
 
 /* Populate de la table `bet` ("Paris disponibles") */
-INSERT INTO `bet` (`id_match`, `odds_team_1`, `odds_team_2`, `status`)
+INSERT INTO `bet` (`id_match`, `odds_team1`, `odds_team2`, `status`)
 SELECT `id_match`, ROUND(RAND() * 10 + 1, 2), ROUND(RAND() * 10 + 1, 2), 'READY'
 FROM `match`;
 

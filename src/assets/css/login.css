@@ -1,0 +1,40 @@
+form {
+  background-color: var(--neutral-400);
+}
+
+form label {
+  color: var(--neutral-0);
+}
+
+
+
+/*****************************/
+/******* MEDIA QUERIES *******/
+/*****************************/
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  header {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .container-fluid .col-md-6 {
+    max-width: 40vw;
+  }
+  
+  .container-fluid .col-md-6 {
+    border-left: none !important;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .container-fluid .col-md-6 {
+    max-width: 35vw;
+  }
+}

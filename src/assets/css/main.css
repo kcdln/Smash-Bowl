@@ -1,0 +1,218 @@
+:root {
+  --color-primary-100: #03838C;
+  --color-primary-500: #005964;
+  --color-primary-900: #BF1D51;
+  --neutral-0: #FFFFFF;
+  --neutral-400: #AFC1CB;
+  --neutral-600: #516078;
+  
+  /* --bs-form-valid-border-color: var(--color-primary-100); */
+  /* --bs-form-invalid-border-color: var(--color-primary-900); */
+}
+
+.header-container {
+  background-color: var(--color-primary-100);
+  color: var(--neutral-0);
+}
+
+header a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.nav-pills .nav-link {
+  color: var(--neutral-0) !important;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  background-color: var(--color-primary-500) !important;
+  color: var(--neutral-0) !important;
+}
+
+.nav-pills .nav-link.disabled {
+  color: var(--color-primary-500) !important;
+}
+
+h1 {
+  font-family: Roboto;
+  font-size: 32px;
+  font-weight: 700;
+  padding: 14px 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+h2, .as-h2 {
+  color: var(--neutral-600);
+  font-family: Roboto;
+  font-size: 32px;
+  font-weight: 700;
+  padding: 10px 0;
+  text-align: center;
+}
+
+h3, .as-h3 {
+  background-color: var(--color-primary-500);
+  color: var(--neutral-0);
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+h4, .as-h4 {
+  color: var(--neutral-600);
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+}
+
+p, .body-regular {
+  color: var(--neutral-600);
+  font-family: Open Sans;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.body-bold {
+  color: var(--neutral-600);
+  font-family: Open Sans;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+article {
+  /* Allow to have same render between all articles (with match-in-progress frame or not) */
+  border: 0.3em solid transparent;
+  min-height: 150px;
+}
+
+article.match-in-progress {
+  border: 0.3em solid var(--color-primary-900) !important;
+  position: relative;
+}
+
+article.match-in-progress::before {
+  background: var(--color-primary-900);
+  border-radius: 0 0.3em 0 0;
+  bottom: 0;
+  color: var(--neutral-0);
+  content: 'En cours';
+  left: 0;
+  padding: 0 0.2em 0 0.1em;
+  position: absolute;
+  
+  /* H4 style */
+  font-family: Roboto;
+  font-size: 24px;
+}
+
+button {
+  /* H4 style */
+  font-family: Roboto !important;
+  font-size: 24px !important;
+}
+
+button:not(.btn-close):not(.btn-secondary) {
+  background-color: var(--color-primary-100) !important;
+  border-color: var(--color-primary-500) !important;
+  color: var(--neutral-0) !important;
+}
+
+button:not(.btn-close):not(.btn-secondary):hover {
+  background-color: var(--color-primary-500) !important;
+}
+
+form label {
+  /* H4 style */
+  font-family: Roboto;
+  font-size: 18px;
+}
+
+.text-danger {
+  color: var(--color-primary-900) !important;
+}
+
+::placeholder {
+  color: var(--neutral-400) !important;
+}
+
+
+
+/*****************************/
+/******* MEDIA QUERIES *******/
+/*****************************/
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  section {
+    /* border-bottom: 0.1em solid var(--neutral-600); */
+    margin-bottom: 1em;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  /* .container-fluid > .align-items-center {
+    align-items: initial !important;
+  } */
+    
+  nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  nav li {
+    display: inline-block;
+    margin-left: 1rem;
+  }
+  
+  section {
+    margin-bottom: 3em;
+  }
+
+  article .container .as-h2 {
+    font-family: inherit;
+    font-size: inherit;
+    padding: inherit;
+  }
+}
+
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  nav li {
+    margin-left: 4rem;
+  }
+  
+  .container-fluid .col-md-6 {
+    max-width: 40vw;
+  }
+  
+  .container-fluid .col-md-6 {
+    border-left: none;
+  }
+}
+
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  main:not(.large-content) {
+    margin: 0 5em;
+  }
+  
+  nav li {
+    margin-left: 6rem;
+  }
+  
+  .container-fluid .col-md-6 {
+    max-width: 35vw;
+  }
+  
+  section {
+    margin-bottom: 4em;
+  }
+}

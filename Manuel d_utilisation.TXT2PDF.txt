@@ -11,9 +11,9 @@ L'application se veut épurée et simple d'utilisation en permettant aux utilisa
 Ajoutez à cela une application web permettant d'analyser les côtes, parier et même miser sur un ou plusieurs matchs se disputant dans le cadre de la compétition. L'utilisateur peut aussi consulter son historique des mises et vérifier d'un coup d'oeil son bénéfice/sa perte grace à un graphique.
 L'ensemble est géré par un administrateur pouvant créer les équipes, joueurs et matchs à venir. Tandis qu'un commentateur alimente les matchs en live via l'application bureautique.
 
-Le nom de l'application Smash Bowl est un jeu de mots qui fait référence évidemment au Super Bowl mais également au jeu vidéo Super Smash Bros. Brawl (sorti sur la console Nintendo Wii en 2008).
+Les couleurs de la charte graphique ce sont inspirées du logo de la dernière édition du Super Bowl LVII, à base de vert de rouge et de gris.
+Le nom de l'application Smash Bowl est un jeu de mots simple qui fait référence évidemment au Super Bowl mais également au jeu vidéo Super Smash Bros. Brawl (sorti sur la console Nintendo Wii en 2008).
 Ceci afin d'apporter une touche ludique et divertissante à la plateforme de paris sportifs.
-
 
 
 ##Identifiants des différents parcours possibles

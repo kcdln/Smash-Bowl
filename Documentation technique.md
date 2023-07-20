@@ -54,15 +54,16 @@ $ ssh-add -l
 $ git remote -v
 ```
 
-Ensuite j'ai configuré VS Code en y intégrant tout un lot d'extensions utiles, telles que (pour ne citer que les plus installés) :
-- [Bootstrap 4, Font awesome 4, Font Awesome 5 Free & Pro snippets](https://marketplace.visualstudio.com/items?itemName=thekalinga.bootstrap4-vscode)
+Ensuite j'ai configuré VS Code en y activant Emmet (très pratique pour tout ce qui est snippets et autres raccourcis de code) et en y intégrant tout un lot d'extensions utiles, telles que :
+- [Bootstrap 5 & Font Awesome Snippets](https://marketplace.visualstudio.com/items?itemName=HansUXdev.bootstrap5-snippets)
 - [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph)
 - [GitLens — Git supercharged](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
 - [HTML CSS Support](https://marketplace.visualstudio.com/items?itemName=ecmel.vscode-html-css)
-- [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+- [Live Server (Five Server)](https://marketplace.visualstudio.com/items?itemName=yandeu.five-server)
 - [Markdown Preview Enhanced](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced)
 - [PHP Intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client)
 - [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [SonarLint](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode)
 
 
 
