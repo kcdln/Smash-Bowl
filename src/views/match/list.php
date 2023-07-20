@@ -1,5 +1,6 @@
 <?php $sRelativePath = '../../../'; ?>
 <?php $sAbsolutePath = __DIR__ . '/' . $sRelativePath; ?>
+<?php require_once $sAbsolutePath . 'src/classes/DBConnectionSingleton.php'; ?>
 
 <!doctype html>
 <html lang="en">
@@ -20,198 +21,166 @@
         <main>
             <h2 class="d-none d-sm-block">Liste de tous les matchs</h2>
             
+            <?php
+                $database = DBConnectionSingleton::getInstance();
+                $connection = $database->getConnection();
+                
+                $sQuery = "
+                    SELECT
+                        M.id_match, M.date_start_at, M.hour_start_at, M.hour_end_at, M.status, M.score_team1, M.score_team2,
+                        T1.name AS 'name_team1', T2.name AS 'name_team2'
+                    FROM smash_bowl.match M
+                    INNER JOIN team T1 ON T1.id_team = M.id_team1
+                    INNER JOIN team T2 ON T2.id_team = M.id_team2
+                    WHERE M.status <> 'CANCELED'
+                    ORDER BY M.date_start_at, M.hour_start_at
+                ";
+                $statement = $connection->query($sQuery);
+                $aMatches = $statement->fetchAll(PDO::FETCH_ASSOC);
+                
+                $aMatchesInProgress = array_filter($aMatches, fn($m) => $m['status'] === 'IN_PROGRESS');
+                $aMatchesToCome = array_filter($aMatches, fn($m) => $m['status'] === 'TO_COME');
+                $aMatchesFinished = array_filter($aMatches, fn($m) => $m['status'] === 'FINISHED');
+            ?>
+            
             <!-- Match in progress -->
             <section>
-                <h3 class="section-title d-none d-sm-flex justify-content-center align-items-center"><span class="pulse d-none d-md-inline-block"></span>En cours</h3>
-                <div class="no-result d-none d-flex align-items-center p-3"><p class="container mb-0 text-center">Aucun match présent dans cette rubrique</p></div>
+                <h3 class="section-title <?php if (count($aMatchesInProgress)): ?>d-none<?php endif; ?> d-sm-flex justify-content-center align-items-center"><span class="pulse d-none d-md-inline-block"></span>En cours</h3>
+                <?php if (!count($aMatchesInProgress)): ?>
+                <div class="no-result d-flex align-items-center p-3"><p class="container mb-0 text-center">Aucun match présent dans cette rubrique</p></div>
+                
+                <?php else: ?>
+                    <?php foreach ($aMatchesInProgress as $m): ?>
+                        <?php $dDateEnd = new DateTimeImmutable($m['date_start_at'] . $m['hour_end_at']); ?>
 
                 <article class="match-in-progress d-flex justify-content-between align-items-center flex-wrap flex-md-nowrap">
                     <!-- Teams names -->
                     <div class="container col-md-6 m-md-0">
                         <div class="body-bold row justify-content-between align-items-center">
-                            <div class="col-5">Falcons de l'Atlantique</div>
-                            <div class="col-2 text-center">VS.</div>
-                            <div class="col-5">Éléphants de l'Est</div>
+                            <div class="col-5 text-end"><?= $m['name_team1']; ?></div>
+                            <div class="col-2 body-regular text-center">VS</div>
+                            <div class="col-5"><?= $m['name_team2']; ?></div>
                         </div>
                     </div>
                     <!-- Scores -->
                     <div class="container col-md-2 m-md-0 text-center">
                         <div class="as-h2 row justify-content-between">
-                            <div class="col-5 col-md-4">5</div>
+                            <div class="col-5 col-md-4"><?= $m['score_team1']; ?></div>
                             <div class="col-2 col-md-4">-</div>
-                            <div class="col-5 col-md-4">7</div>
+                            <div class="col-5 col-md-4"><?= $m['score_team2']; ?></div>
                         </div>
                     </div>
                     <!-- Hours -->
                     <div class="container col-md-4 m-md-0">
                         <div class="row">
-                            <p class="mb-0 text-end">Fin prévue : <time datetime="08-07-2023 21:15:00">21h15</time></p>
+                            <p class="mb-0 text-end">
+                                Fin prévue : <time datetime="<?= $dDateEnd->format('d-m-Y H:i:s'); ?>"><?= $dDateEnd->format('H\hi'); ?></time>
+                            </p>
                         </div>
                     </div>
                 </article>
-
-                <article class="match-in-progress d-flex justify-content-between align-items-center flex-wrap flex-md-nowrap">
-                    <!-- Teams names -->
-                    <div class="container col-md-6 m-md-0">
-                        <div class="body-bold row justify-content-between align-items-center">
-                            <div class="col-5">Falcons de l'Atlantique</div>
-                            <div class="col-2 text-center">VS.</div>
-                            <div class="col-5">Éléphants de l'Est</div>
-                        </div>
-                    </div>
-                    <!-- Scores -->
-                    <div class="container col-md-2 m-md-0 text-center">
-                        <div class="as-h2 row justify-content-between">
-                            <div class="col-5 col-md-4">5</div>
-                            <div class="col-2 col-md-4">-</div>
-                            <div class="col-5 col-md-4">7</div>
-                        </div>
-                    </div>
-                    <!-- Hours -->
-                    <div class="container col-md-4 m-md-0">
-                        <div class="row">
-                            <p class="mb-0 text-end">Fin prévue : <time datetime="08-07-2023 21:15:00">21h15</time></p>
-                        </div>
-                    </div>
-                </article>
+                
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </section>
             
             <!-- Match to come -->
             <section>
-                <h3 class="section-title d-none d-sm-block">À venir</h3>
-                <div class="no-result d-none d-flex align-items-center p-3"><p class="container mb-0 text-center">Aucun match présent dans cette rubrique</p></div>
+                <h3 class="section-title <?php if (count($aMatchesToCome)): ?>d-none<?php endif; ?> d-sm-block">À venir</h3>
+                <?php if (!count($aMatchesToCome)): ?>
+                <div class="no-result d-flex align-items-center p-3"><p class="container mb-0 text-center">Aucun match présent dans cette rubrique</p></div>
+
+                <?php else: ?>
+                    <?php foreach ($aMatchesToCome as $m): ?>
+                        <?php $dDateStart = new DateTimeImmutable($m['date_start_at'] . $m['hour_start_at']); ?>
+                        <?php $dDateEnd = new DateTimeImmutable($m['date_start_at'] . $m['hour_end_at']); ?>
                 
                 <article class="d-flex justify-content-between align-items-center flex-wrap">
                     <!-- Teams names -->
                     <div class="container col-md-6 m-md-0">
                         <div class="body-bold row justify-content-between align-items-center">
-                            <div class="col-5">Tigres de la Ville</div>
-                            <div class="col-2 text-center">VS.</div>
-                            <div class="col-5">Ours Grizzlis</div>
+                            <div class="col-5 text-end"><?= $m['name_team1']; ?></div>
+                            <div class="col-2 body-regular text-center">VS</div>
+                            <div class="col-5"><?= $m['name_team2']; ?></div>
                         </div>
                     </div>
                     <!-- Date (mobile only) -->
                     <div class="container m-md-0 d-block d-md-none">
                         <div class="row">
-                            <p class="mb-0">Date du match : <time class="body-bold" datetime="14-07-2023">Le 14/07/2023</time></p>
+                            <p class="mb-0">
+                                Date du match : <time class="body-bold" datetime="<?= $dDateStart->format('d-m-Y'); ?>">Le <?= $dDateStart->format('d/m/Y'); ?></time>
+                            </p>
                         </div>
                     </div>
                     <!-- Hours (mobile only) -->
                     <div class="container m-md-0 d-block d-md-none">
                         <div class="row justify-content-between">
-                            <p class="col-6 mb-0 text-start">Début : <time datetime="14-07-2023 18:30:00">18h30</time></p>
-                            <p class="col-6 mb-0 text-end">Fin prévue : <time datetime="14-07-2023 19:30:00">19h30</time></p>
+                            <p class="col-6 mb-0 text-start">
+                                Début : <time datetime="<?= $dDateStart->format('d-m-Y H:i:s'); ?>"><?= $dDateStart->format('H\hi'); ?></time>
+                            </p>
+                            <p class="col-6 mb-0 text-end">
+                                Fin prévue : <time datetime="<?= $dDateEnd->format('d-m-Y H:i:s'); ?>"><?= $dDateEnd->format('H\hi'); ?></time>
+                            </p>
                         </div>
                     </div>
                     <!-- Date & Hours (not on mobile) -->
                     <div class="container col-md-4 m-md-0 d-none d-md-block text-end">
                         <div class="row">
                             <p class="mb-0">
-                                <time datetime="14-07-2023">Le 14/07/2023</time>
-                                <time datetime="14-07-2023 18:30:00">de 18h30</time>
-                                <time datetime="14-07-2023 19:30:00">à 19h30</time>
+                                Le <time datetime="<?= $dDateStart->format('d-m-Y'); ?>"><?= $dDateStart->format('d/m/Y'); ?></time>
+                                de <time datetime="<?= $dDateStart->format('d-m-Y H:i:s'); ?>"><?= $dDateStart->format('H\hi'); ?></time>
+                                à <time datetime="<?= $dDateEnd->format('d-m-Y H:i:s'); ?>"><?= $dDateEnd->format('H\hi'); ?></time>
                             </p>
                         </div>
                     </div>
                 </article>
-                
-                <article class="d-flex justify-content-between align-items-center flex-wrap">
-                    <!-- Teams names -->
-                    <div class="container col-md-6 m-md-0">
-                        <div class="body-bold row justify-content-between align-items-center">
-                            <div class="col-5">Tigres de la Ville</div>
-                            <div class="col-2 text-center">VS.</div>
-                            <div class="col-5">Ours Grizzlis</div>
-                        </div>
-                    </div>
-                    <!-- Date (mobile only) -->
-                    <div class="container m-md-0 d-block d-md-none">
-                        <div class="row">
-                            <p class="mb-0">Date du match : <time class="body-bold" datetime="14-07-2023">Le 14/07/2023</time></p>
-                        </div>
-                    </div>
-                    <!-- Hours (mobile only) -->
-                    <div class="container m-md-0 d-block d-md-none">
-                        <div class="row justify-content-between">
-                            <p class="col-6 mb-0 text-start">Début : <time datetime="14-07-2023 18:30:00">18h30</time></p>
-                            <p class="col-6 mb-0 text-end">Fin prévue : <time datetime="14-07-2023 19:30:00">19h30</time></p>
-                        </div>
-                    </div>
-                    <!-- Date & Hours (not on mobile) -->
-                    <div class="container col-md-4 m-md-0 d-none d-md-block text-end">
-                        <div class="row">
-                            <p class="mb-0">
-                                <time datetime="14-07-2023">Le 14/07/2023</time>
-                                <time datetime="14-07-2023 18:30:00">de 18h30</time>
-                                <time datetime="14-07-2023 19:30:00">à 19h30</time>
-                            </p>
-                        </div>
-                    </div>
-                </article>
+
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </section>
             
             <!-- Match done -->
             <section>
-                <h3 class="section-title d-none d-sm-block">Terminé</h3>
-                <div class="no-result d-none d-flex align-items-center p-3"><p class="container mb-0 text-center">Aucun match présent dans cette rubrique</p></div>
+                <h3 class="section-title <?php if (count($aMatchesFinished)): ?>d-none<?php endif; ?> d-sm-block">Terminé</h3>
+                <?php if (!count($aMatchesFinished)): ?>
+                <div class="no-result d-flex align-items-center p-3"><p class="container mb-0 text-center">Aucun match présent dans cette rubrique</p></div>
+
+                <?php else: ?>
+                    <?php foreach ($aMatchesFinished as $m): ?>
+                        <?php $dDateStart = new DateTimeImmutable($m['date_start_at'] . $m['hour_start_at']); ?>
+                        <?php $dDateEnd = new DateTimeImmutable($m['date_start_at'] . $m['hour_end_at']); ?>
                 
                 <article class="d-flex justify-content-between align-items-center flex-wrap">
                     <!-- Teams names -->
                     <div class="container col-md-6 m-md-0">
                         <div class="body-bold row justify-content-between align-items-center">
-                            <div class="col-5">Renards du Sud</div>
-                            <div class="col-2 text-center">VS.</div>
-                            <div class="col-5">Loups de l'Ouest</div>
+                            <div class="col-5 text-end"><?= $m['name_team1']; ?></div>
+                            <div class="col-2 body-regular text-center">VS</div>
+                            <div class="col-5"><?= $m['name_team2']; ?></div>
                         </div>
                     </div>
                     <!-- Scores -->
                     <div class="container col-md-2 m-md-0 text-center">
                         <div class="as-h2 row justify-content-between">
-                            <div class="col-5 col-md-4">21</div>
+                            <div class="col-5 col-md-4"><?= $m['score_team1']; ?></div>
                             <div class="col-2 col-md-4">-</div>
-                            <div class="col-5 col-md-4">13</div>
+                            <div class="col-5 col-md-4"><?= $m['score_team2']; ?></div>
                         </div>
                     </div>
                     <!-- Date & Hours -->
                     <div class="container col-md-4 m-md-0 text-center text-md-end">
                         <div class="row">
                             <p class="mb-0">
-                                <time datetime="21-06-2023">Le 21/06/2023</time>
-                                <time datetime="21-06-2023 19:00:00">de 19h00</time>
-                                <time datetime="21-06-2023 20:03:27">à 20h03</time>
+                                Le <time datetime="<?= $dDateStart->format('d-m-Y'); ?>"><?= $dDateStart->format('d/m/Y'); ?></time>
+                                de <time datetime="<?= $dDateStart->format('d-m-Y H:i:s'); ?>"><?= $dDateStart->format('H\hi'); ?></time>
+                                à <time datetime="<?= $dDateEnd->format('d-m-Y H:i:s'); ?>"><?= $dDateEnd->format('H\hi'); ?></time>
                             </p>
                         </div>
                     </div>
                 </article>
                 
-                <article class="d-flex justify-content-between align-items-center flex-wrap">
-                    <!-- Teams names -->
-                    <div class="container col-md-6 m-md-0">
-                        <div class="body-bold row justify-content-between align-items-center">
-                            <div class="col-5">Renards du Sud</div>
-                            <div class="col-2 text-center">VS.</div>
-                            <div class="col-5">Loups de l'Ouest</div>
-                        </div>
-                    </div>
-                    <!-- Scores -->
-                    <div class="container col-md-2 m-md-0 text-center">
-                        <div class="as-h2 row justify-content-between">
-                            <div class="col-5 col-md-4">21</div>
-                            <div class="col-2 col-md-4">-</div>
-                            <div class="col-5 col-md-4">13</div>
-                        </div>
-                    </div>
-                    <!-- Date & Hours -->
-                    <div class="container col-md-4 m-md-0 text-center text-md-end">
-                        <div class="row">
-                            <p class="mb-0">
-                                <time datetime="21-06-2023">Le 21/06/2023</time>
-                                <time datetime="21-06-2023 19:00:00">de 19h00</time>
-                                <time datetime="21-06-2023 20:03:27">à 20h03</time>
-                            </p>
-                        </div>
-                    </div>
-                </article>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </section>
         </main>
 

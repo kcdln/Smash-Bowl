@@ -1,5 +1,20 @@
 <?php $sRelativePath = '../../../'; ?>
 <?php $sAbsolutePath = __DIR__ . '/' . $sRelativePath; ?>
+<?php require_once $sAbsolutePath . 'src/classes/DBConnectionSingleton.php'; ?>
+<?php
+    $iIdUser = 2; //TODO replace this hard-coded value with a session ID
+    
+    // Retrieve id_match to display all details about it
+    $iIdMatch = $_GET['id'] ?? 1; //TODO replace this hard-coded value with a GET parameter
+    /* if (isset($_GET['id']) && (int) $_GET['id'] > 0) {
+        $iIdMatch = (int) $_GET['id'];
+    } else {
+        http_response_code(503); // Error code 503 Service Unavailable
+        $sRedirectionUrl = $_SERVER['HTTP_REFERER'] ?? '/';
+
+        header('Location: ' . $sRedirectionUrl);
+    } */
+?>
 
 <!doctype html>
 <html lang="en">
@@ -20,30 +35,89 @@
         <main>
             <div class="p-0 px-sm-3">
                 <h2 class="d-none d-sm-block">Détails du match</h2>
+
+            <?php
+                $database = DBConnectionSingleton::getInstance();
+                $connection = $database->getConnection();
                 
+                $sQuery = "
+                    SELECT
+                        M.id_match, M.date_start_at, M.hour_start_at, M.hour_end_at, M.status, M.weather, M.id_team1, M.id_team2, M.score_team1, M.score_team2,
+                        T1.name AS 'name_team1', T2.name AS 'name_team2',
+                        B.odds_team1, B.odds_team2,
+                        H.id_team, H.amount
+                    FROM smash_bowl.match M
+                    INNER JOIN team T1 ON T1.id_team = M.id_team1
+                    INNER JOIN team T2 ON T2.id_team = M.id_team2
+                    LEFT JOIN bet B ON B.id_match = M.id_match
+                    LEFT JOIN userbethistoric H ON H.id_bet = B.id_bet AND H.id_user = $iIdUser
+                    WHERE M.id_match = $iIdMatch
+                ";
+                $statement = $connection->query($sQuery);
+                $match = $statement->fetch(PDO::FETCH_ASSOC);
+                
+                $bMatchInProgress = $match['status'] === 'IN_PROGRESS';
+                
+                $dDateStart = new DateTimeImmutable($match['date_start_at'] . $match['hour_start_at']);
+                $dDateEnd = new DateTimeImmutable($match['date_start_at'] . $match['hour_end_at']);
+                
+                $bHasUserBet = (bool) ($match['id_team'] && $match['amount']);
+                if ($bHasUserBet) {
+                    $sBetUserTeamName = $match['id_team'] === $match['id_team2'] ? $match['name_team2'] : $match['name_team1'];
+                    $fOddsOfBetTeam = $match['id_team'] === $match['id_team2'] ? $match['odds_team2'] : $match['odds_team1'];
+                    $fPotentialGain = number_format(($match['amount'] * $fOddsOfBetTeam) - $match['amount'], 2, '.', '');
+                }
+                
+                
+                
+                $sQuery = "
+                    SELECT P.firstname, P.lastname, P.id_team, P.jersey_number
+                    FROM player P
+                    WHERE P.id_team IN (" . $match['id_team1'] . ", " . $match['id_team2'] . ")
+                    ORDER BY P.jersey_number
+                ";
+                $statement = $connection->query($sQuery);
+                $aPlayersOfBothTeams = $statement->fetchAll(PDO::FETCH_ASSOC);
+                $aCompositionTeam1 = array_values(array_filter($aPlayersOfBothTeams, fn($p) => $p['id_team'] === $match['id_team1']));
+                $aCompositionTeam2 = array_values(array_filter($aPlayersOfBothTeams, fn($p) => $p['id_team'] === $match['id_team2']));
+                
+                
+                
+                $sQuery = "
+                    SELECT C.short_description, C.long_description, C.created_at
+                    FROM comment C
+                    WHERE C.id_match = $iIdMatch
+                    ORDER BY C.created_at
+                ";
+                $statement = $connection->query($sQuery);
+                $aComments = $statement->fetchAll(PDO::FETCH_ASSOC);
+            ?>
+
                 <section>
-                    <article class="match-in-progress d-flex justify-content-center align-items-center flex-wrap">
+                    <article class="<?php if ($bMatchInProgress): ?>match-in-progress<?php endif; ?> d-flex justify-content-center align-items-center flex-wrap">
                         <!-- Teams names -->
                         <div class="container">
                             <div class="body-bold row justify-content-center align-items-center">
-                                <div class="col-5 col-md-4 col-lg-3">Falcons de l'Atlantique</div>
-                                <div class="col-2 text-center">VS.</div>
-                                <div class="col-5 col-md-4 col-lg-3">Éléphants de l'Est</div>
+                                <div class="col-5 col-md-4 col-lg-3 text-end"><?= $match['name_team1']; ?></div>
+                                <div class="col-2 body-regular text-center">VS</div>
+                                <div class="col-5 col-md-4 col-lg-3"><?= $match['name_team2']; ?></div>
                             </div>
                         </div>
                         <!-- Scores -->
                         <div class="container">
                             <div class="as-h2 row justify-content-center">
-                                <div class="col-5 col-md-4 col-lg-3">5</div>
-                                <div class="col-2">-</div>
-                                <div class="col-5 col-md-4 col-lg-3">7</div>
+                                <div class="col-5 col-md-4 col-lg-3"><?= $match['score_team1']; ?></div>
+                                <div class="col-1">-</div>
+                                <div class="col-5 col-md-4 col-lg-3"><?= $match['score_team2']; ?></div>
                             </div>
                         </div>
                         <!-- Hours -->
                         <div class="container">
                             <div class="row justify-content-end justify-content-md-evenly">
-                                <p class="d-none d-md-block col-5 col-md-4 col-lg-3 mb-0">Météo prévue : <span>Ensoleillé</span></p>
-                                <p class="col-5 col-md-4 col-lg-3 mb-0">Fin prévue : <time datetime="08-07-2023 21:15:00">21h15</time></p>
+                                <p class="d-none d-md-block col-5 col-md-4 col-lg-3 mb-0 text-end">Météo prévue : <span><?= $match['weather']; ?></span></p>
+                                <p class="col-5 col-md-4 col-lg-3 mb-0">
+                                    Fin prévue : <time datetime="<?= $dDateEnd->format('d-m-Y H:i:s'); ?>"><?= $dDateEnd->format('H\hi'); ?></time>
+                                </p>
                             </div>
                         </div>
                     </article>
@@ -52,8 +126,13 @@
                     <div class="container-fluid d-block d-md-none bg-color-neutral-400">
                         <div class="row">
                             <div class="col-12">
-                                <p class="mb-1"><span class="body-bold">10,00€ misé</span> sur : Falcons de l'Atlantique</p>
-                                <p class="mb-0"><span class="body-bold">30,00€ de gain</span> potentiel</p>
+                                <?php if ($bHasUserBet): ?>
+                                <p class="mb-1"><span class="body-bold"><?= number_format($match['amount'], 2, '.', ''); ?>€ misé</span> sur "<?= $sBetUserTeamName; ?>"</p>
+                                <p class="mb-0"><span class="body-bold"><?= $fPotentialGain; ?>€ de gain</span> potentiel (côte : <?= number_format($fOddsOfBetTeam, 2, '.', ''); ?>)</p>
+                                <?php else: ?>
+                                <p class="my-1 text-center"><span class="body-bold">Pas de mise enregistrée pour ce match</span></p>
+                                <p class="text-center">Veuillez placer une mise depuis notre application web sur cette même page</p>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -63,8 +142,8 @@
                         <!-- Bet button & odds -->
                         <div class="row bg-color-neutral-400 align-items-center text-center">
                             <div class="col-5">
-                                <p class="mb-0">Côte de l'équipe "Falcons de l'Atlantique"</p>
-                                <p class="body-bold mb-0">4.0</p>
+                                <p class="mb-0">Côte de l'équipe "<?= $match['name_team1']; ?>"</p>
+                                <p class="body-bold mb-0"><?= number_format($match['odds_team1'], 2, '.', ''); ?></p>
                             </div>
                             <div class="col-2">
                                 <button class="as-h3 btn" type="button" data-bs-toggle="modal" data-bs-target="#modal-user-bet">Miser</button>
@@ -80,26 +159,26 @@
                                             <form id="form-user-bet" class="needs-validation custom-needs-at-least-one-input" action="" method="post" novalidate>
                                                 <div class="modal-body">
                                                     <div class="body-bold row justify-content-between align-items-center">
-                                                        <div class="col-5">Falcons de l'Atlantique</div>
-                                                        <div class="col-1 p-0 text-center">VS.</div>
-                                                        <div class="col-5">Éléphants de l'Est</div>
+                                                        <div class="col-5"><?= $match['name_team1']; ?></div>
+                                                        <div class="col-1 p-0 body-regular text-center">VS</div>
+                                                        <div class="col-5"><?= $match['name_team2']; ?></div>
                                                     </div>
                                                     <div class="row justify-content-center">
                                                         <div class="col-4">
                                                             <label for="user-bet-team1">Mise</label>
-                                                            <input id="user-bet-team1" class="form-control w-100" type="number" name="user-bet-team1" min="0.01" step="0.01" required>
+                                                            <input id="user-bet-team1" class="form-control w-100" type="number" name="user-bet-team1" <?php if ($bHasUserBet && $match['id_team'] === $match['id_team1']): ?>value="<?= $match['amount']; ?>"<?php endif; ?> min="0.01" step="0.01" required>
                                                         </div>
                                                         <div class="col-2 border-start border-end">
                                                             <label>Côte</label>
-                                                            <div class="body-bold">4.0</div>
+                                                            <div class="body-bold"><?= number_format($match['odds_team1'], 2, '.', ''); ?></div>
                                                         </div>
                                                         <div class="col-2 border-start border-end">
                                                             <label>Côte</label>
-                                                            <div class="body-bold">1.4</div>
+                                                            <div class="body-bold"><?= number_format($match['odds_team2'], 2, '.', ''); ?></div>
                                                         </div>
                                                         <div class="col-4">
                                                             <label for="user-bet-team2">Mise</label>
-                                                            <input id="user-bet-team2" class="form-control w-100" type="number" name="user-bet-team2" min="0.01" step="0.01" required>
+                                                            <input id="user-bet-team2" class="form-control w-100" type="number" name="user-bet-team2" <?php if ($bHasUserBet && $match['id_team'] === $match['id_team2']): ?>value="<?= $match['amount']; ?>"<?php endif; ?> min="0.01" step="0.01" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -113,32 +192,64 @@
                                 </div>
                             </div>
                             <div class="col-5">
-                                <p class="mb-0">Côte de l'équipe "Éléphants de l'Est"</p>
-                                <p class="body-bold mb-0">1.4</p>
+                                <p class="mb-0">Côte de l'équipe "<?= $match['name_team2']; ?>"</p>
+                                <p class="body-bold mb-0"><?= number_format($match['odds_team2'], 2, '.', ''); ?></p>
                             </div>
                         </div>
                         
                         <!-- Teams composition -->
                         <h2>Compositions d'équipe</h2>
                         <div class="row justify-content-center">
-                            <div class="col-4 col-md-3">
-                                <p>Andrew Reed</p>
-                                <p>Antonio Johnson</p>
-                                <p>Adam Stephenson</p>
-                                <p>Daniel Waller</p>
-                                <p>Cody Gray</p>
+                            <div class="col-4 col-xxl-3">
+                            <?php foreach ($aCompositionTeam1 as $k => $compo1): ?>
+                                <?php $bOneOnTwo = $k % 2 === 0; ?>
+                                
+                                <div class="team-player row align-items-center">
+                                    <?php if ($bOneOnTwo): ?>
+                                        <div class="col-2 d-flex justify-content-center">
+                                        <p class="body-bold"><?= $compo1['jersey_number']; ?></p>
+                                        <img src="<?= $sRelativePath; ?>src/assets/img/player_jersey.jpg" alt="Maillot de joueur" width="50" loading="lazy">
+                                    </div>
+                                <?php endif; ?>
+
+                                    <div class="col-10<?php if (!$bOneOnTwo): ?> text-end<?php endif; ?>"><p class="d-inline-block mb-0"><?= $compo1['firstname']; ?> <?= $compo1['lastname']; ?></p></div>
+                                        
+                                <?php if (!$bOneOnTwo): ?>
+                                    <div class="col-2 d-flex justify-content-center">
+                                        <p class="body-bold"><?= $compo1['jersey_number']; ?></p>
+                                        <img src="<?= $sRelativePath; ?>src/assets/img/player_jersey.jpg" alt="Maillot de joueur" width="50" loading="lazy">
+                                    </div>
+                                <?php endif; ?>
+                                </div>
+                            <?php endforeach; ?>
                             </div>
                             <div class="col-1"></div>
                             <div id="teams-composition-separator" class="col-1 d-flex justify-content-center align-items-center border-start border-end">
                                 <img src="<?= $sRelativePath; ?>src/assets/img/lombardi-trophy.png" alt="Trophée Vince-Lombardi">
                             </div>
                             <div class="col-1"></div>
-                            <div class="col-4 col-md-3">
-                                <p>Jason Martin</p>
-                                <p>Jeffrey Howard</p>
-                                <p>Andrew Walker</p>
-                                <p>Joseph Carter</p>
-                                <p>Steven Reilly</p>
+                            <div class="col-4 col-xxl-3">
+                            <?php foreach ($aCompositionTeam2 as $k => $compo2): ?>
+                                <?php $bOneOnTwo = $k % 2 !== 0; ?>
+                                
+                                <div class="team-player row align-items-center">
+                                    <?php if ($bOneOnTwo): ?>
+                                        <div class="col-2 d-flex justify-content-center">
+                                        <p class="body-bold"><?= $compo2['jersey_number']; ?></p>
+                                        <img src="<?= $sRelativePath; ?>src/assets/img/player_jersey.jpg" alt="Maillot de joueur" width="50" loading="lazy">
+                                    </div>
+                                <?php endif; ?>
+
+                                    <div class="col-10<?php if (!$bOneOnTwo): ?> text-end<?php endif; ?>"><p class="d-inline-block mb-0"><?= $compo2['firstname']; ?> <?= $compo2['lastname']; ?></p></div>
+                                        
+                                <?php if (!$bOneOnTwo): ?>
+                                    <div class="col-2 d-flex justify-content-center">
+                                        <p class="body-bold"><?= $compo2['jersey_number']; ?></p>
+                                        <img src="<?= $sRelativePath; ?>src/assets/img/player_jersey.jpg" alt="Maillot de joueur" width="50" loading="lazy">
+                                    </div>
+                                <?php endif; ?>
+                                </div>
+                            <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
@@ -150,48 +261,22 @@
             
             <div class="container bg-color-neutral-400 mb-2 g-md-5 g-xl-0">
                 <div class="row pt-3 mx-1 mx-md-0">
+                    <?php if ($aComments): ?>
+                    <?php foreach ($aComments as $comment): ?>
+                        <?php $dCreatedDate = new DateTimeImmutable($comment['created_at']); ?>
+                    
                     <div class="col-2 col-md-1 text-md-end">
-                        <time class="body-bold" datetime="14-07-2023 20:15:00">20h15</time>
+                        <time class="body-bold" datetime="<?= $dCreatedDate->format('d-m-Y H:i:s'); ?>"><?= $dCreatedDate->format('H\hi'); ?></time>
                     </div>
                     <div class="col-10 col-md-11">
-                        <p>Le Super Bowl a commencé sur les chapeaux de roue avec une action intense dès le coup d'envoi.</p>
+                        <p><?= $comment['long_description'] ?? $comment['short_description']; ?></p>
                     </div>
-                    <div class="col-2 col-md-1 text-md-end">
-                        <time class="body-bold" datetime="14-07-2023 20:20:00">20h20</time>
-                    </div>
-                    <div class="col-10 col-md-11">
-                        <p>L'équipe 1 a marqué un touchdown spectaculaire grâce à une passe précise.</p>
-                    </div>
-                    <div class="col-2 col-md-1 text-md-end">
-                        <time class="body-bold" datetime="14-07-2023 20:23:00">20h23</time>
-                    </div>
-                    <div class="col-10 col-md-11">
-                        <p>L'équipe 2 ne s'est pas laissée faire et a répondu avec un touchdown puissant.</p>
-                    </div>
-                    <div class="col-2 col-md-1 text-md-end">
-                        <time class="body-bold" datetime="14-07-2023 20:34:00">20h34</time>
-                    </div>
-                    <div class="col-10 col-md-11">
-                        <p>Interception cruciale de l'équipe 1</p>
-                    </div>
-                    <div class="col-2 col-md-1 text-md-end">
-                        <time class="body-bold" datetime="14-07-2023 20:36:00">20h36</time>
-                    </div>
-                    <div class="col-10 col-md-11">
-                        <p>L'équipe 1 a converti un field goal pour ajouter des points à leur avance.</p>
-                    </div>
-                    <div class="col-2 col-md-1 text-md-end">
-                        <time class="body-bold" datetime="14-07-2023 20:43:00">20h43</time>
-                    </div>
-                    <div class="col-10 col-md-11">
-                        <p>L'équipe 2 a réalisé un énorme retour avec une série de touchdowns successifs, renversant complètement la situation.</p>
-                    </div>
-                    <div class="col-2 col-md-1 text-md-end">
-                        <time class="body-bold" datetime="14-07-2023 20:47:00">20h47</time>
-                    </div>
-                    <div class="col-10 col-md-11">
-                        <p>Superbe jeu défensif de l'équipe 2</p>
-                    </div>
+                    
+                    <?php endforeach; ?>
+                    <?php else: ?>
+                    <p class="my-1 text-center"><span class="body-bold">Ce match n'a pas de commentaires</span></p>
+                    <p class="text-center">Nos commentateurs sont prêts à entamer cette rubrique dès le début du match</p>
+                    <?php endif; ?>
                 </div>
             </div>
         </main>
@@ -200,7 +285,7 @@
             <a class="link-underline link-underline-opacity-0" href="src/views/match/list.php">
                 <div class="row">
                     <div class="col-12">
-                        <img src="src/assets/icon/arrow-left-short.svg" alt="Flèche gauche">
+                        <img src="<?= $sRelativePath; ?>src/assets/icon/arrow-left-short.svg" alt="Flèche gauche">
                         <p class="d-inline-block as-h3 m-0">Retour à la liste</p>
                     </div>
                 </div>
